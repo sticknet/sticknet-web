@@ -1,0 +1,203 @@
+.formContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.methodContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+    padding: 10px;
+    width: 225px;
+    margin-left: 17px;
+    margin-right: 17px;
+    /*padding: 8px 0;*/
+    border-radius: 8px;
+    border: 0px solid var(--black);
+}
+
+.countryContainer {
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-top: 16px;
+    justify-content: center;
+    width: 520px;
+}
+
+.title {
+    font-size: 18px;
+    /*margin-top: 2vh;*/
+    /*margin-bottom: 2vh;*/
+}
+
+.description {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.codeInput {
+    border: 0;
+    border-bottom: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    font-size: 18px;
+    height: 64px;
+    text-align: center;
+    width: 86px;
+    outline: none;
+}
+
+.phoneInput {
+    font-size: 18px;
+    background-color: #fff;
+    padding-left: 8px;
+    padding-right: 8px;
+    align-self: center;
+    border: 0;
+    border-bottom: 1px solid lightgrey;
+    height: 64px;
+    width: 432px;
+    outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* CODE INPUT FORM */
+
+.pinContainer {
+    display: flex;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.pinInput {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    text-align: center;
+    margin-right: 10px;
+    border: 1px solid #6060FF;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.pinInput:focus {
+    background-color: #9090ff;
+    animation: scaleUpDown 0.5s infinite alternate;
+}
+
+@keyframes scaleUpDown {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.resend {
+    font-size: 16px;
+    color: grey;
+    text-align: center;
+    margin-top: 32px;
+    background-color: transparent;
+    border: none;
+}
+
+
+/*Password Input*/
+
+.keyCircle {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--primary-color);
+    border-radius: 50%;
+    margin-top: 40px;
+}
+
+.input {
+    width: 432px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    margin-top: 32vh;
+}
+
+.input::placeholder {
+    color: #bbb;
+}
+
+.input:focus {
+    outline: none;
+    box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dont {
+    color: grey;
+    text-decoration: underline;
+    margin-top: 48px;
+}
+
+.qrInfo {
+    font-size: 20px;
+    margin-top: 32px;
+}
+
+.storeContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+
+.store {
+    width: 150px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 0px 60px;
+    background: #000000;
+}
+
+/*Password Recovery*/
+
+.deviceItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: flex-start;
+    margin-bottom: 12px;
+}
+
+.deviceName {
+    font-weight: bold;
+    color: var(--black)
+}

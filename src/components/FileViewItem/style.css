@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imageFile {
+    width: 90vh;
+    height: 90vh;
+    object-fit: contain;
+}
+
+.placeholder {
+    color: var(--black)
+}
+
+.progressContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+}
+
+.processing {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 8px;
+}

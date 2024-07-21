@@ -1,0 +1,25 @@
+.button {
+    border-radius: 40px;
+    align-self: center;
+    /*border-color: var(--black);*/
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    width: 520px;
+    height: 48px;
+    margin-top: 2vh;
+}
+
+.text {
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.colored {
+    background: linear-gradient(to right, var(--secondaryB-color), var(--secondaryA-color));
+}
+
+.black {
+    background-color: var(--black);
+}

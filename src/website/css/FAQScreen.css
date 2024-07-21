@@ -1,0 +1,157 @@
+@media screen and (max-width: 1100px) {
+    .stiiick {
+        width: 40vw;
+        height: 10vw;
+        padding: 2.5vw
+    }
+
+    .headerContainer {
+        width: 100vw;
+        height: 10vh;
+        border-bottom: lightgrey 1px solid;
+        margin-top: -7vh;
+    }
+
+    .headerTitle {
+        text-align: center;
+    }
+
+    .ask {
+        color: red;
+        font-size: 4vw;
+    }
+
+    .headerTitle {
+        text-align: center;
+    }
+
+    .title {
+        color: grey;
+        margin-top: 10vh;
+    }
+
+    .subTitle {
+        font-weight: bold;
+        margin-top: 2vh;
+    }
+
+    .text {
+        display: inline-block;
+        margin-top: 10vh;
+        margin-left: 5vw;
+    }
+
+    .ol, .ul {
+        padding-top: 1vh;
+        padding-left: 15vw;
+    }
+
+    .li {
+        padding-top: 2vh;
+
+    }
+
+    .subTitleContainer {
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 2vh;
+        width: 80vw;
+    }
+
+    .subTitle {
+        font-weight: bold;
+        margin-top: 1.5vh;
+    }
+
+    .a {
+        display: flex;
+        flex-direction: row;
+        margin-top: 3vh;
+    }
+            .copyRight {
+        text-align: center;
+        margin-top: 2vh;
+        color: grey;
+        font-size: 3vw;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .stiiick {
+        width: 15vw;
+        height: 3.75vw;
+        padding: 1vw;
+        object-fit: contain;
+    }
+
+    .headerContainer {
+        width: 100vw;
+        height: 10vh;
+        padding-bottom: 1vh;
+        border-bottom: lightgrey 1px solid;
+        margin-top: -7vh;
+    }
+
+    .headerTitle {
+        text-align: center;
+    }
+
+    .introduction {
+        padding-top: 5vh;
+        color: grey;
+        text-align: center;
+        width: 40vw;
+        padding-left: 5vw;
+    }
+
+    .title {
+        color: grey;
+        margin-top: 10vh;
+        font-size: 1.5vw;
+    }
+
+    .subTitle {
+        font-weight: bold;
+        margin-top: 2vh;
+    }
+
+    .text {
+        display: inline-block;
+        margin-top: 10vh;
+        margin-left: 5vw;
+    }
+
+    .ol, .ul {
+        padding-top: 1vh;
+        padding-left: 5vw;
+    }
+
+    .li {
+        padding-top: 2vh;
+        font-size: 1vw;
+
+    }
+
+    .subTitleContainer {
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 2vh;
+        width: 80vw;
+    }
+
+    .subTitle {
+        font-weight: bold;
+        margin-top: 2.5vh;
+        font-size: 1.25vw;
+    }
+
+    .a {
+        display: flex;
+        flex-direction: row;
+        margin-top: 3vh;
+    }
+       .copyRight {
+        text-align: center;
+        color: grey;
+        font-size: 0.75vw;
+           padding-bottom: 2vh;
+    }
+}

@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    background-color: #f3f3f3;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.input {
+    border: none;
+    outline: none;
+    background-color: #f3f3f3;
+    padding-left: 8px;
+    padding-right: 8px;
+    width: 40vw;
+    font-size: 17px;
+}
+

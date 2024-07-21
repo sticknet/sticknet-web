@@ -1,0 +1,52 @@
+.menuContainer {
+    position: absolute;
+    background-color: #ffffff;
+    width: 300px;
+    border: 0.5px solid lightgrey;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    top: 55px;
+    right: 20px;
+}
+
+.infoContainer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nameContainer {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+
+.name {
+    /*margin-top: 10px;*/
+    font-weight: bold;
+}
+
+.email {
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 20px;
+    /*font-weight: bold;*/
+}
+
+.note {
+    color: #8d8d8d;
+    font-size: 13px;
+    flex: 1;
+    margin-left: 4px;
+    text-align: left;
+}
+
+.noteContainer {
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 0 12px;
+    flex-direction: row;
+    align-items: flex-start;
+}

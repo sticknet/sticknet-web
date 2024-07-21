@@ -1,0 +1,21 @@
+.container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 3.84px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-right: 36px;
+}
+
+.text {
+  font-weight: bold;
+   white-space: pre-line;
+}
+
+.date {
+  color: silver;
+  margin-top: 4px;
+}

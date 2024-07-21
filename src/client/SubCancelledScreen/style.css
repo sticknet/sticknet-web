@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.welcome {
+   font-size: 32px;
+}
+
+.text {
+    margin-top: 12px;
+    font-size: 18px;
+}
+
+.sticknet {
+    font-family: 'Sirin Stencil', sans-serif;
+}
+
+.premium {
+    font-weight: bold;
+}

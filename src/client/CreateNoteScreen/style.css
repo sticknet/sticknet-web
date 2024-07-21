@@ -1,0 +1,53 @@
+.stackContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vh;
+}
+
+.stackItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stackItemTitle {
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    padding: 0.5vw;
+    border-radius: 10px;
+}
+
+.stackItemTitle:hover {
+    background-color: var(--hover-color);
+}
+
+
+.input {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    height: 75vh;
+    margin-top: 4vh;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    font-size: 15px;
+    border-radius: 40px;
+    height: 32px;
+    margin: auto;
+    border: 1px solid var(--black);
+    margin-bottom: 16px;
+    text-align: center;
+    color: var(--black);
+    align-self: flex-start;
+}
+
+
+.parsedText {
+    white-space: pre-line;
+}

@@ -1,0 +1,84 @@
+.container {
+    position: fixed;
+    bottom: 0;
+    right: 2vw;
+    width: 400px;
+    background-color: #fefefe;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.15);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+}
+
+.titleContainer {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    background-color: #F8F8FC;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.itemsContainer {
+    overflow-y: auto;
+}
+
+.title {
+    font-size: 16px;
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.button {
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.button:hover {
+    background-color: var(--hover-color);
+}
+
+/*UploadItem*/
+
+.itemContainer {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+    flex: 1;
+}
+
+.img {
+    width: 32px;
+    height: 32px;
+}
+
+.fileName {
+    margin-left: 8px;
+    color: var(--grey);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.checkCircle {
+    color: var(--success)
+}
+

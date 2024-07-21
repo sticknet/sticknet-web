@@ -1,0 +1,51 @@
+.sticknet {
+    font-family: 'Sirin Stencil', sans-serif;
+    font-size: 32px;
+}
+
+.premium {
+    font-weight: bold;
+}
+
+.shieldText {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    margin-left: 16px;
+    margin-top: 8px;
+
+}
+
+.itemContainer {
+    padding: 8px;
+    border-radius: 10px;
+    width: 100%;
+    justify-content: center;
+    background-color: #ffffff;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 40px;
+    box-shadow: 1px 3px 10px 2px rgba(96, 96, 255, 0.25);
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.basicText {
+    color: grey;
+}
+
+.upgradeButton {
+    /*padding: 8px 100px;*/
+    margin-bottom: 28px;
+}
+
+.cancel {
+    color: grey;
+    text-decoration: underline;
+}

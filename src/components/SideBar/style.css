@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    /*width: 15vw;*/
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: var(--navbar-height);
+    box-shadow: 0 0 20px 4px rgba(0, 0, 0, 0.08);
+}
+
+.itemContainer {
+    text-decoration: none;
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 15%;
+    padding-right: 15%;
+    height: 60px;
+    margin-top: 1vh;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+.itemContainer:hover {
+    background-color: var(--hover-light-color);
+}
+
+.headerContainer:hover {
+    background-color: transparent;
+}
+
+.title {
+    margin-left: 10%;
+    font-size: 15px;
+}
+
+.headerContainer {
+    margin-bottom: 3vh;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--silver)
+}
+
+.storageContainer {
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-top: 28px;
+}
+
+.storageText {
+    color: var(--black);
+    font-size: 15px;
+}
+
+.upgradeButton {
+    padding: 8px 50px;
+    margin-top: 12px;
+}
+
+.shieldText {
+    font-size: 15px;
+    display: flex;
+    margin-top: 8px;
+}

@@ -1,0 +1,59 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 260px;
+    padding-bottom: 8vh;
+    min-height: 90vh;
+    padding-top: var(--navbar-height);
+}
+
+.screenContainer {
+    display: flex;
+    /*padding: 3vw;*/
+    flex-direction: column;
+    overflow-x: hidden;
+    padding-left: 52px;
+    padding-top: 20px;
+
+    /*min-height: 100vh;*/
+    width: 100%;
+}
+
+.sectionTitleContainer {
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 1vh;
+}
+
+.sectionTitle {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.sectionCount {
+    font-size: 15px;
+    color: grey;
+}
+
+.stackContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2vh;
+}
+
+.stackItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stackItemTitle {
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.stackItemTitle:hover {
+    background-color: var(--hover-color);
+}

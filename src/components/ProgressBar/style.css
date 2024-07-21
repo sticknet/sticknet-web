@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.filled {
+    display: flex;
+    background-color: var(--primary-color);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-right: 1px solid white;
+    height: 8px;
+}
+
+.empty {
+    display: flex;
+    background-color: lightgrey;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 8px;
+}

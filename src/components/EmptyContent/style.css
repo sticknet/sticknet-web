@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-top: 20vh;
+}
+
+.text {
+    font-size: 18px;
+    color: grey;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

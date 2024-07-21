@@ -1,0 +1,52 @@
+.headerTitle {
+    text-align: center;
+    color: #363636;
+}
+
+
+.h2 {
+    padding-top: 2vh;
+    color: #363636;
+}
+
+.h3 {
+    padding-top: 2vh;
+    color: #363636;
+}
+
+
+.p {
+    padding-top: 2vh;
+    line-height: 1.5;
+    color: #363636;
+}
+
+.a {
+    color: #363636;
+}
+
+
+.ul, .ol {
+    padding-top: 1vh;
+    padding-left: 2vw;
+}
+
+.li {
+    padding-bottom: 1vh;
+    line-height: 1.5;
+    color: #363636;
+}
+
+.hLine {
+    margin-top: 3vh;
+    border-top: 1px solid lightgray;
+}
+
+.link {
+    text-decoration: none;
+    color: #6060FF;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

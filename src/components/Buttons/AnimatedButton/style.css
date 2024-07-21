@@ -1,0 +1,31 @@
+.buttonContainer {
+    text-align: center;
+}
+
+.getStartedButton {
+    display: inline-block;
+    background: linear-gradient(to right, var(--secondaryB-color), var(--secondaryA-color));
+    color: #ffffff;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 40px;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.2s;
+}
+
+.getStartedButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+    background-position: right center;
+}
+
+
+.getStartedButton:active {
+    transform: scale(0.95);
+}
+
+.getStartedButton:focus {
+    outline: none;
+}

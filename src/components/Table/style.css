@@ -1,0 +1,47 @@
+th {
+    font-size: 1vw;
+    font-weight: normal;
+    text-align: left;
+    padding: 20px;
+    border-style: none;
+    white-space: nowrap;
+    /*width: 40px;*/
+}
+
+td {
+    border-style: none;
+    text-align: center;
+    width: 100px;
+}
+
+tr {
+    border-bottom: 1px solid lightgrey;
+    /*width: 40px;*/
+
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid lightgrey;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 8px 4px rgba(96, 96, 255, 0.25);
+}
+
+.cell {
+    background: rgba(255,0,0,0.1);
+    margin: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 1100px) {
+    th {
+        font-size: 4.5vw;
+    }
+    table {
+        overflow: auto;
+        box-shadow: none;
+    }
+}

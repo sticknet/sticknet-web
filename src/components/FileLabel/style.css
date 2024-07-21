@@ -1,0 +1,7 @@
+.extensionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(240,240,240);
+    border-radius: 8px;
+}

@@ -1,0 +1,7 @@
+.circleBase {
+    stroke: #d1d3d7
+}
+
+.circleProgress {
+    stroke: var(--primary-color)
+}

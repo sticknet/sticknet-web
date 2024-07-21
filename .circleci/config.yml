@@ -1,0 +1,73 @@
+version: 2.1
+
+commands:
+
+  node_dependencies:
+    description: Install Javascript dependencies using Yarn. This command correctly configures the cache for any number of package.json and yarn.lock files.
+    parameters:
+      cache:
+        description: Save and restore the build cache? Defaults to true
+        type: boolean
+        default: true
+      cache_folder:
+        description: The path to the yarn cache folder.  Defaults to /tmp/yarn
+        type: string
+        default: "/tmp/yarn"
+      yarn_install_directory:
+        description: The working directory to run install at. Defaults to yarn's current working directory
+        type: string
+        default: ""
+    steps:
+      - when:
+          condition: <<parameters.cache>>
+          steps:
+            - run:
+                name: Create cache checksum file
+                command: |
+                  mkdir -p ~/.tmp/checksumfiles
+                  find . -type f -name 'package.json' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/package.json
+                  find . -type f -name 'yarn.lock' -not -path "*node_modules*" -exec cat {} + >> ~/.tmp/checksumfiles/yarn.lock
+            - restore_cache:
+                keys:
+                  - yarn-cache-{{ arch }}-{{ checksum "~/.tmp/checksumfiles/package.json" }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
+      - when:
+          condition:
+            equal: [ "", <<parameters.yarn_install_directory>> ]
+          steps:
+            - run:
+                name: Yarn Install
+                command: "yarn install --frozen-lockfile --non-interactive --cache-folder <<parameters.cache_folder>>"
+      - unless:
+          condition:
+            equal: [ "", <<parameters.yarn_install_directory>> ]
+          steps:
+            - run:
+                name: Yarn Install (<<parameters.yarn_install_directory>>)
+                command: "yarn --cwd <<parameters.yarn_install_directory>> install --frozen-lockfile --non-interactive --cache-folder <<parameters.cache_folder>>"
+      - when:
+          condition: <<parameters.cache>>
+          steps:
+            - save_cache:
+                paths:
+                  - <<parameters.cache_folder>>
+                key: yarn-cache-{{ arch }}-{{ checksum "~/.tmp/checksumfiles/package.json" }}-{{ checksum "~/.tmp/checksumfiles/yarn.lock" }}-{{ .Environment.CACHE_VERSION }}
+
+jobs:
+  lint_and_test:
+    docker:
+      - image: cimg/node:18.20.4
+    resource_class: large
+    steps:
+      - checkout
+      - node_dependencies
+      - run:
+          name: Run ESLint
+          command: yarn lint
+      - run:
+          name: Run local tests (jest)
+          command: yarn test-ci
+
+workflows:
+  CI:
+    jobs:
+      - lint_and_test

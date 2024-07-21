@@ -1,0 +1,171 @@
+.spImg {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 100vw;
+    align-self: center;
+}
+
+
+.slogan {
+    align-self: center;
+    padding-top: 1vh;
+    color: #363636;
+    text-align: center;
+}
+
+.omar {
+    align-self: center;
+    margin-top: 2vh;
+    color: #363636;
+    text-decoration: none;
+}
+
+.omar:hover {
+    color: #6060FF;
+}
+
+.title {
+    padding-top: 2vh;
+    align-self: center;
+    color: #363636;
+}
+
+.h1 {
+    padding-top: 2vh;
+    color: #363636;
+}
+
+.h2 {
+    padding-top: 2vh;
+    color: #363636;
+}
+
+.h3 {
+    padding-top: 2vh;
+    color: #363636;
+}
+
+.q {
+    padding-top: 3vh;
+    color: #363636;
+}
+
+
+.p {
+    padding-top: 2vh;
+    line-height: 1.5;
+    color: #363636;
+}
+
+.description {
+    /*color: grey;*/
+    padding-top: 5vh;
+    color: #363636;
+}
+
+
+.ans {
+    padding-top: 1.5vh;
+    line-height: 1.5;
+    color: #363636;
+}
+
+.a {
+    color: #363636;
+}
+
+
+.ul, .ol {
+    padding-top: 1vh;
+    padding-left: 2vw;
+}
+
+.li {
+    padding-bottom: 1vh;
+    line-height: 1.5;
+    color: #363636;
+}
+
+.flowDiagram {
+    width: 100%;
+    padding-top: 2vh;
+}
+
+.figcaption {
+    text-align: center;
+    padding-top: 2vh;
+    color: #363636;
+}
+
+.ticksContainer {
+    padding-top: 1vh;
+    padding-left: 1vw;
+}
+
+.ticksContainer > p {
+    padding-top: 1vh;
+    color: #363636;
+}
+
+.link, .menuItem {
+    text-decoration: none;
+    color: #6060FF;
+}
+
+.link:hover, .menuItem:hover {
+    text-decoration: underline;
+}
+
+.linkBullet {
+    color: var(--black);
+    text-decoration: none;
+}
+
+
+.hLine {
+    margin-top: 3vh;
+    border-top: 1px solid lightgray;
+}
+
+@media screen and (max-width: 1100px) {
+    .spImg {
+        width: 50vw;
+        height: 50vw;
+    }
+
+    .ul, .ol {
+        padding-left: 10vw;
+    }
+
+    .flowDiagram {
+        width: 100vw;
+        transform: translateX(-5vw);
+    }
+}
+
+/* Usage docs */
+
+.code {
+    margin-top: 2vh;
+    padding: 1vw;
+}
+
+@media screen and (min-width: 1100px) {
+    .bodyBorder {
+        border-left: 1px solid lightgrey;
+    }
+
+    .contents {
+        position: fixed;
+        left: 3vw;
+    }
+
+    .menuItem {
+        text-decoration: none;
+        color: var(--black);
+    }
+
+    .menuItem:hover {
+        color: #6060FF;
+    }
+}
