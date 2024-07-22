@@ -39,7 +39,7 @@
     "eject": "react-scripts eject",
     "build-production": "webpack --config webpack.prod.config.js --progress --colors",
     "lint": "eslint .",
-    "lint-fix": "eslint . --fix",
+    "lint-fix": "eslint . --fix --quiet",
     "lint-debug": "eslint . --debug",
     "lint-quiet": "eslint . --quiet",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org sticknet --project web ./assets/bundles/ && sentry-cli sourcemaps upload --org sticknet --project web ./assets/bundles/"

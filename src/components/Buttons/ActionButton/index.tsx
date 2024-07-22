@@ -11,12 +11,12 @@ interface ActionButtonProps {
 
 const ActionButton: React.FC<ActionButtonProps> = ({text, icon, onClick, style, htmlFor}) => {
     return (
-        <div
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+        <label
+            htmlFor={htmlFor}
             className={s.container}
             style={style}
             onClick={onClick}
-            role='button'
-            tabIndex={0}
             onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     onClick?.(e);
@@ -24,7 +24,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({text, icon, onClick, style, 
             }}>
             {icon && <div style={{marginRight: 6}}>{icon}</div>}
             <p className={s.text}>{text}</p>
-        </div>
+        </label>
     );
 };
 
