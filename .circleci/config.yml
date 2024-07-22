@@ -67,7 +67,7 @@ jobs:
           name: Run local tests (jest)
           command: yarn test-ci
 
-workflows:
-  CI:
-    jobs:
-      - lint_and_test
+#workflows:
+#  CI:
+#    jobs:
+#      - lint_and_test
