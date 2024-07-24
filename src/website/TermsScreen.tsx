@@ -16,10 +16,9 @@ class TermsScreen extends Component {
                     <h1 className={s.headerTitle}>Terms of Use & Privacy Policy</h1>
 
                     <p className={s.p}>
-                        Sticknet an end-to-end encrypted & decentralized cloud storage. When using Sticknet, all
-                        uploads, content shared, profiles and groups are protected with end-to-end encryption. Meaning
-                        they cannot be accessed by us or other third parties. Our Terms of Use and Privacy Policy are
-                        available below.
+                        Sticknet a secure social storage platform. When using Sticknet, all uploads, content shared,
+                        profiles and groups are protected with end-to-end encryption. Meaning they cannot be accessed by
+                        us or other third parties. Our Terms of Use and Privacy Policy are available below.
                     </p>
 
                     <ul className={s.ul}>

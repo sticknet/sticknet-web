@@ -12,6 +12,8 @@ export const SyncAnimation: React.FC = () => {
                 options={{loop: true, autoplay: true, animationData: syncAnimation}}
                 isStopped={false}
                 isPaused={false}
+                // @ts-ignore
+                style={{transform: 'scale(2)'}}
             />
         </div>
     );
