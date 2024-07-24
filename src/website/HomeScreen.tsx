@@ -3,6 +3,7 @@ import {useHistory, Link} from 'react-router-dom';
 import Lottie from 'react-lottie';
 import {connect, ConnectedProps} from 'react-redux';
 import QRCode from 'react-qr-code';
+import {FaStar} from 'react-icons/fa';
 import s from './css/HomeScreen.css';
 import {
     securityAnimation,
@@ -42,7 +43,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                     <div className={`${s.section} ${s.headerSection}`}>
                         <div style={{marginTop: '15vh'}}>
                             <p className={s.title}>Own your privacy.</p>
-                            <p className={s.description}>End-to-end encrypted & decentralized cloud storage.</p>
+                            <p className={s.description}>Secure Social Storage Platform.</p>
                             <p className={`${s.description} ${s.subDescription}`}>
                                 Sticknet isn't just secure and private, but also rich and powerful!
                             </p>
@@ -263,8 +264,20 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                     </div>
                 </div>
 
-                <div className={s.sectionContainer} style={{background: '#000'}}>
+                <div className={s.sectionContainer} style={{background: '#000', height: '10vh'}}>
                     <div className={s.section}>
+                        <div style={{flex: 0.5}}>
+                            <Lottie
+                                options={{
+                                    loop: true,
+                                    animationData: verifiedAnimation,
+                                }}
+                                height={300}
+                                width={300}
+                                isStopped={false}
+                                isPaused={false}
+                            />
+                        </div>
                         <div style={{flex: 0.5, paddingTop: '5vh'}}>
                             <p className={s.heading} style={{color: '#fff'}}>
                                 Verified Architecture
@@ -278,17 +291,28 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                                 impact-factor security journals in the world.
                             </p>
                         </div>
+                    </div>
+                </div>
+                <div className={s.sectionContainer} style={{background: '#000', height: '20vh'}}>
+                    <div className={s.section}>
                         <div style={{flex: 0.5}}>
-                            <Lottie
-                                options={{
-                                    loop: true,
-                                    animationData: verifiedAnimation,
-                                }}
-                                height={300}
-                                width={300}
-                                isStopped={false}
-                                isPaused={false}
-                            />
+                            <p className={s.heading} style={{color: '#fff'}}>
+                                Open Source
+                            </p>
+                            <p className={`${s.description} ${s.description2}`} style={{color: '#fff'}}>
+                                Sticknet is a fully open-source project. All of Sticknet's repositories including the{' '}
+                                <a
+                                    target='_blank'
+                                    href='https://github.com/sticknet/sticknet-mobile'
+                                    rel='noreferrer'
+                                    className={s.link2}>
+                                    mobile apps
+                                </a>
+                                , the web app, the server, and the Stick protocol are open-source.
+                            </p>
+                        </div>
+                        <div style={{flex: 0.5, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                            <FaStar color='#EAC54F' style={{width: 200, height: 200}} />
                         </div>
                     </div>
                 </div>
@@ -364,7 +388,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                 <div className={s.section} style={{paddingTop: '15vh'}}>
                     <p className={s.title}>Own your privacy.</p>
                     <p className={s.description} style={{width: '100%'}}>
-                        End-to-end encrypted & decentralized cloud storage.
+                        Secure Social Storage Platform.
                     </p>
                     <p className={`${s.description} ${s.subDescription}`}>
                         Sticknet isn't just secure and private, but also rich and powerful!
@@ -509,6 +533,8 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                         width={400}
                         isStopped={false}
                         isPaused={false}
+                        // @ts-ignore
+                        style={{transform: 'translate(-5vw, 0)'}}
                     />
                 </div>
             </div>
@@ -555,7 +581,7 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                 </div>
             </div>
 
-            <div className={s.sectionContainer} style={{background: '#000'}}>
+            <div className={s.sectionContainer} style={{background: '#000', height: '60vh'}}>
                 <div className={s.section}>
                     <p className={s.heading} style={{color: '#fff'}}>
                         Verified Architecture
@@ -578,6 +604,28 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                         isStopped={false}
                         isPaused={false}
                     />
+                </div>
+            </div>
+
+            <div className={s.sectionContainer} style={{background: '#000', height: '55vh', paddingTop: '0vw'}}>
+                <div className={s.section}>
+                    <p className={s.heading} style={{color: '#fff'}}>
+                        Open Source
+                    </p>
+                    <p className={`${s.description} ${s.description2}`} style={{color: '#fff'}}>
+                        Sticknet is a fully open-source project. All of Sticknet's repositories including the{' '}
+                        <a
+                            target='_blank'
+                            href='https://github.com/sticknet/sticknet-mobile'
+                            rel='noreferrer'
+                            className={s.link2}>
+                            mobile apps
+                        </a>
+                        , the web app, the server, and the Stick protocol are open-source.
+                    </p>
+                    <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex', marginTop: 40}}>
+                        <FaStar color='#EAC54F' style={{width: 150, height: 150}} />
+                    </div>
                 </div>
             </div>
 

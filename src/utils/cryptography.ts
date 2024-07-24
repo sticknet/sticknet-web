@@ -282,15 +282,13 @@ async function decryptFileVault(
     dispatch: any,
     isPreview: boolean | undefined,
 ): Promise<{uri: string; heicUri?: string} | null> {
-    console.log('WTF0');
     const encryptedSecret = cipher.substring(0, cipher.length - 44);
     const salt = cipher.substring(cipher.length - 44);
     const password = await storage.getItem('#Password');
     if (password) {
         const secret = await pbDecrypt(encryptedSecret, salt, password);
         if (secret) {
-            const uris = await decryptBlob(filePath, secret, uriKey, fileType, dispatch, isPreview);
-            return uris;
+            return decryptBlob(filePath, secret, uriKey, fileType, dispatch, isPreview);
         }
     }
     return null;

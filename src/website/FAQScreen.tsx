@@ -72,10 +72,10 @@ class FAQScreen extends Component {
                         What is Sticknet?
                     </h3>
                     <p className={s.ans}>
-                        Sticknet is an end-to-end encrypted & decentralized cloud storage - the first of its kind.
-                        Unlike other cloud storages, any data you upload on Sticknet is end-to-end encrypted. This means
-                        that no one else can access your data - including us and third parties. Sticknet also has an
-                        integrated social network - which is also fully end-to-end encrypted.
+                        Sticknet is a secure social storage platform - the first of its kind. Unlike other cloud
+                        storages, any data you upload on Sticknet is end-to-end encrypted. This means that no one else
+                        can access your data - including us and third parties. Sticknet also has an integrated social
+                        network - which is also fully end-to-end encrypted.
                     </p>
 
                     <h3 className={s.q} id='a3'>

@@ -2,6 +2,8 @@
 
 Web app version of [Sticknet](https://github.com/sticknet/sticknet-mobile) built using React.
 
+Web app version includes the Vault. For full features, including groups, albums, and profile check the mobile apps.
+
 ## Mobile app
 
 You can find Sticknet's mobile apps and main repo [here](https://github.com/sticknet/sticknet-mobile).
@@ -32,8 +34,14 @@ You can find Sticknet's mobile apps and main repo [here](https://github.com/stic
 
 1. Mobile apps: [Sticknet mobile](https://github.com/sticknet/sticknet-mobile)
 2. Backend server: [Sticknet engine](https://github.com/sticknet/sticknet-engine)
-3. End-to-end encryption protocol: [Stick protocol](https://github.com/sticknet/stick-protocl)
+3. End-to-end encryption protocol: [Stick protocol](https://github.com/sticknet/stick-protocol)
 
 ## Contact Us
 
 You can email us as at contact@sticknet.org
+
+## License
+
+Copyright © 2018-2024 <a href="https://www.sticknet.org">Sticknet</a>
+
+Licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
