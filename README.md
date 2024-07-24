@@ -1,8 +1,8 @@
 # Sticknet Web App
 
-Web app version of [Sticknet](https://github.com/sticknet/sticknet-mobile) built using React.
+Web app version of [Sticknet](https://github.com/sticknet/sticknet-mobile) built using React and TypeScript.
 
-Web app version includes the Vault. For full features, including groups, albums, and profile check the mobile apps.
+Web app version includes the Vault. For full features, including groups, albums, and profile check out the mobile apps.
 
 ## Mobile app
 
