@@ -28,6 +28,7 @@ const Table: React.FC = () => {
         ['Decentralized storage', 'no', 'no', 'no', 'yes'],
         ['Integrated social network', 'no', 'no', 'no', 'yes'],
         ['Integrated messenger', 'no', 'external', 'no', 'yes'],
+        ['2 TB cost / month', '$11.99', '$10.99', '$9.99', '$8.99'],
     ];
 
     return (

@@ -2,8 +2,8 @@
 
 :root {
     --theme-color: #6060FF;
-    --hover-light-color: rgba(0,0,0,0.05);
-    --hover-color: rgba(0,0,0,0.1);
+    --hover-light-color: rgba(0, 0, 0, 0.05);
+    --hover-color: rgba(0, 0, 0, 0.1);
     --primary-color: #6060FF;
     --secondaryA-color: #8040FF;
     --secondaryB-color: #4080FF;
@@ -13,6 +13,7 @@
     --success: #34A853;
     --navbar-height: 60px
 }
+
 /*@font-face {*/
 /*  font-family: 'SirinStencil-Regular';*/
 /*  src: url('../assets/fonts/SirinStencil-Regular.ttf') format('truetype');*/
@@ -114,6 +115,12 @@ input[type="reset"] {
     align-items: center;
     border-radius: 34px;
     min-height: 50vh;
+}
+
+@media screen and (max-width: 1100px) {
+    .box {
+        width: 90vw;
+    }
 }
 
 .centerScreen {

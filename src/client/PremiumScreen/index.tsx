@@ -5,6 +5,7 @@ import {IoShieldCheckmark, IoSpeedometerOutline} from 'react-icons/io5';
 import {LiaStickyNoteSolid} from 'react-icons/lia';
 import {MdGroups2} from 'react-icons/md';
 import {BiSolidBadgeCheck} from 'react-icons/bi';
+import {useHistory} from 'react-router-dom';
 import gs from '../../global.css';
 import s from './style.css';
 import {premiumAnimation} from '../../../assets/lottie';
@@ -53,9 +54,12 @@ type PremiumScreenProps = PropsFromRedux;
 
 const PremiumScreen: React.FC<PremiumScreenProps> = (props) => {
     useEffect(() => {
-        props.fetchSubscriptionDetails();
+        window.scrollTo(0, 0);
+        document.title = 'Sticknet | Premium';
+        if (props.user) props.fetchSubscriptionDetails();
     }, []);
-
+    const history = useHistory();
+    const isDesktop = window.innerWidth > window.innerHeight;
     return (
         <div className={gs.main}>
             <div className={`${gs.screenContainer} ${gs.centerScreen}`}>
@@ -96,9 +100,19 @@ const PremiumScreen: React.FC<PremiumScreenProps> = (props) => {
                                 <Button text='Proceed to checkout' colored onClick={() => props.checkout()} />
                             ) : (
                                 <Button
-                                    text='Try free for 30 days&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;Proceed to checkout'
+                                    text={
+                                        props.user
+                                            ? 'Try free for 30 days&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;Proceed to checkout'
+                                            : 'Try free for 30 days'
+                                    }
                                     colored
-                                    onClick={() => props.checkout()}
+                                    onClick={() =>
+                                        props.user
+                                            ? props.checkout()
+                                            : isDesktop
+                                            ? history.replace('/portal-login')
+                                            : history.replace('qr-redirect')
+                                    }
                                 />
                             )}
                         </>
@@ -141,6 +155,7 @@ const mapStateToProps = (state: IApplicationState) => ({
     expiring: state.auth.user?.subscriptionExpiring,
     expires: state.app.subscription.expires,
     loading: state.progress.loading,
+    user: state.auth.user,
 });
 
 const connector = connect(mapStateToProps, {...iap});
