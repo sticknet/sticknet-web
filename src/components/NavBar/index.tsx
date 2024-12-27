@@ -89,6 +89,9 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                                 <Link className={s.headerLink} to='/support'>
                                     <span>Support</span>
                                 </Link>
+                                <Link className={s.headerLink} to='/premium'>
+                                    <span>Pricing</span>
+                                </Link>
                                 {this.props.user ? (
                                     <ProfileMenu
                                         visible={this.state.visible}
@@ -101,18 +104,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                         )
                     )
                 ) : (
-                    <div
-                        className={s.menuIcon}
-                        id='menu'
-                        role='button'
-                        tabIndex={0}
-                        onClick={this.handleMenuClick}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                this.handleMenuClick();
-                            }
-                        }}
-                        aria-label='Menu'>
+                    <div className={s.menuIcon} id='menu' role='button' tabIndex={0} aria-label='Menu'>
                         <span className={`${s.menuIconLine} ${s.menuIconLineLeft}`} />
                         <span className={s.menuIconLine} />
                         <span className={`${s.menuIconLine} ${s.menuIconLineRight}`} />
@@ -127,9 +119,17 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                         }}
                         role='menu'
                         aria-label='Mobile Menu'>
-                        <a
+                        <Link
                             onClick={this.handleMenuClick}
                             className={`${s.headerLink} ${s.headerLink1}`}
+                            to='/premium'
+                            tabIndex={0}
+                            role='menuitem'>
+                            <span>Pricing</span>
+                        </Link>
+                        <a
+                            onClick={this.handleMenuClick}
+                            className={`${s.headerLink}`}
                             href={`${window.location.origin}#get-sticknet`}
                             tabIndex={0}
                             role='menuitem'>
