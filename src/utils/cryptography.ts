@@ -313,4 +313,17 @@ async function decryptTextVault(cipher: string): Promise<string | null> {
     return null;
 }
 
-export {encryptBlob, decryptBlob, encryptFileVault, decryptFileVault, encryptTextVault, decryptTextVault};
+async function createPasswordHash(password: string, passwordSalt: string) {
+     const response = await argon2.hash({
+            pass: password,
+            salt: toByteArray(passwordSalt),
+            type: argon2.ArgonType.Argon2id,
+            mem: 4 * 1024,
+            parallelism: 2,
+            time: 3,
+            hashLen: 32,
+        });
+        return fromByteArray(response.hash);
+}
+
+export {encryptBlob, decryptBlob, encryptFileVault, decryptFileVault, encryptTextVault, decryptTextVault, createPasswordHash};

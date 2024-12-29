@@ -10,7 +10,7 @@ import {colors} from '../../foundations';
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 interface PasswordFormProps extends PropsFromRedux {
-    setFormNumber: (number: number) => void;
+    setForm: (formName: string) => void;
 }
 
 const PasswordForm: React.FC<PasswordFormProps> = (props) => {
@@ -55,7 +55,7 @@ const PasswordForm: React.FC<PasswordFormProps> = (props) => {
                 autoFocus
             />
             <Button text='Log In' id='continue' style={{marginTop: '32px'}} onClick={login} />
-            <button type='button' className={s.dont} onClick={() => props.setFormNumber(4)}>
+            <button type='button' className={s.dont} onClick={() => props.setForm('passwordRecovery')}>
                 Forgot password?
             </button>
         </div>

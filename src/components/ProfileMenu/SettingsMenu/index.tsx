@@ -10,7 +10,8 @@ import SettingsItem from '../../SettingsItem';
 import s from './style.css';
 import {auth, iap} from '../../../actions';
 import {colors} from '../../../foundations';
-import {IApplicationState} from '../../../types'; // Adjust the import path as necessary
+import {IApplicationState} from '../../../types';
+import {useDisconnect} from 'wagmi';
 
 interface SettingsMenuProps extends PropsFromRedux {
     visible: boolean;
@@ -28,6 +29,7 @@ export interface SettingItem {
 
 const SettingsMenu: React.FC<SettingsMenuProps> = (props) => {
     const history = useHistory();
+    const {disconnect} = useDisconnect();
     const actions: SettingItem[] = [
         {
             text: 'My Vault',
@@ -56,11 +58,13 @@ const SettingsMenu: React.FC<SettingsMenuProps> = (props) => {
         {
             text: 'Log Out',
             icon: <AiOutlinePoweroff color='#0F0F28' />,
-            onClick: () =>
+            onClick: async () => {
+                await disconnect();
                 props.logout(() => {
                     props.setVisible(false);
                     history.push('/');
-                }),
+                });
+            }
         },
     ];
 

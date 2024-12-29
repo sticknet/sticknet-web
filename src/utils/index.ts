@@ -25,6 +25,7 @@ import {
     decryptFileVault,
     encryptTextVault,
     decryptTextVault,
+    createPasswordHash
 } from './cryptography';
 
 export {
@@ -50,6 +51,7 @@ export {
     validateEmail,
     encryptTextVault,
     decryptTextVault,
+    createPasswordHash,
     handleLinks,
     createFilesList,
 };

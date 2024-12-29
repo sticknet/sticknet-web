@@ -28,6 +28,7 @@ import {
 } from './client';
 import configureStore from './store';
 import {IApplicationState} from './types';
+import AppKitProvider from './wallet/AppKitProvider';
 
 Sentry.init({
     dsn: 'https://fdc543e07d78591598c69e65b01b0ab9@o4506009368199168.ingest.sentry.io/4506150014877696',
@@ -56,7 +57,7 @@ declare global {
     }
 }
 
-HTMLElement.prototype.pseudoStyle = function (element: string, prop: string, value: string): HTMLElement {
+HTMLElement.prototype.pseudoStyle = function(element: string, prop: string, value: string): HTMLElement {
     const _sheetId = 'pseudoStyles';
     const _head = document.head || document.getElementsByTagName('head')[0];
     const _sheet = (document.getElementById(_sheetId) as HTMLStyleElement) || document.createElement('style');
@@ -77,9 +78,9 @@ type RootContainerProps = ConnectedProps<typeof connector>;
 
 class RootContainerComponent extends PureComponent<RootContainerProps> {
     PrivateRoute = ({
-        component: ChildComponent,
-        ...rest
-    }: {
+                        component: ChildComponent,
+                        ...rest
+                    }: {
         component: ComponentType<RouteComponentProps>;
         [key: string]: any;
     }) => {
@@ -87,7 +88,7 @@ class RootContainerComponent extends PureComponent<RootContainerProps> {
             <Route
                 {...rest}
                 render={(props) => {
-                    if (!this.props.user) return <Redirect to='/portal-login' />;
+                    if (!this.props.user) return <Redirect to="/portal-login" />;
                     return <ChildComponent {...props} />;
                 }}
             />
@@ -97,31 +98,33 @@ class RootContainerComponent extends PureComponent<RootContainerProps> {
     render() {
         const {PrivateRoute} = this;
         return (
-            <BrowserRouter>
-                <App>
-                    <Switch>
-                        <Route exact path='/' component={HomeScreen} />
-                        <Route exact path='/legal' component={TermsScreen} />
-                        <Route exact path='/faq' component={FAQScreen} />
-                        <Route exact path='/support' component={QuestionScreen} />
-                        <Route exact path='/account-deletion-request' component={DeleteRequestScreen} />
-                        <Route exact path='/thank-you' component={ThankScreen} />
-                        <Route exact path='/stick-protocol' component={StickProtocolScreen} />
-                        <Route exact path='/stick-protocol/usage-documentation' component={SPUsageScreen} />
-                        <Route exact path='/portal-login' component={LoginScreen} />
-                        <Route exact path='/qr-redirect' component={QRRedirect} />
-                        <Route exact path='/app' component={QRRedirect} />
-                        <Route exact path='/premium' component={PremiumScreen} />
-                        <PrivateRoute exact path='/welcome-to-premium' component={WelcomeScreen} />
-                        <PrivateRoute exact path='/subscription-cancelled' component={SubCancelledScreen} />
-                        <PrivateRoute path='/vault/files' component={VaultScreen} />
-                        <PrivateRoute exact path='/vault/photos' component={PhotosScreen} />
-                        <PrivateRoute exact path='/vault/notes' component={NotesScreen} />
-                        <PrivateRoute exact path='/vault/notes/create-note' component={CreateNoteScreen} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </App>
-            </BrowserRouter>
+            <AppKitProvider>
+                <BrowserRouter>
+                    <App>
+                        <Switch>
+                            <Route exact path="/" component={HomeScreen} />
+                            <Route exact path="/legal" component={TermsScreen} />
+                            <Route exact path="/faq" component={FAQScreen} />
+                            <Route exact path="/support" component={QuestionScreen} />
+                            <Route exact path="/account-deletion-request" component={DeleteRequestScreen} />
+                            <Route exact path="/thank-you" component={ThankScreen} />
+                            <Route exact path="/stick-protocol" component={StickProtocolScreen} />
+                            <Route exact path="/stick-protocol/usage-documentation" component={SPUsageScreen} />
+                            <Route exact path="/portal-login" component={LoginScreen} />
+                            <Route exact path="/qr-redirect" component={QRRedirect} />
+                            <Route exact path="/app" component={QRRedirect} />
+                            <Route exact path="/premium" component={PremiumScreen} />
+                            <PrivateRoute exact path="/welcome-to-premium" component={WelcomeScreen} />
+                            <PrivateRoute exact path="/subscription-cancelled" component={SubCancelledScreen} />
+                            <PrivateRoute path="/vault/files" component={VaultScreen} />
+                            <PrivateRoute exact path="/vault/photos" component={PhotosScreen} />
+                            <PrivateRoute exact path="/vault/notes" component={NotesScreen} />
+                            <PrivateRoute exact path="/vault/notes/create-note" component={CreateNoteScreen} />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </App>
+                </BrowserRouter>
+            </AppKitProvider>
         );
     }
 }

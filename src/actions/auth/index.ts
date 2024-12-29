@@ -1,15 +1,15 @@
 import storage from 'redux-persist/lib/storage';
-import argon2 from 'argon2-browser';
-import base64 from 'base64-js';
 import {Dispatch} from 'redux';
 import {progress, app, auth, vault, fetched, appTemp} from '../actionTypes';
 import {globalData} from '../globalVariables';
 import axios from '../myaxios';
 import {API} from '../URL';
-import {getOSAndBrowser} from '../../utils';
+import {createPasswordHash, getOSAndBrowser} from '../../utils';
 
-export function requestEmailCode(email: string, callback: () => void = () => {}, failCallback: () => void = () => {}) {
-    return async function (dispatch: Dispatch) {
+export function requestEmailCode(email: string, callback: () => void = () => {
+}, failCallback: () => void = () => {
+}) {
+    return async function(dispatch: Dispatch) {
         globalData.authId = email;
         dispatch({type: progress.START_LOADING});
         const {data} = await axios.post(`${API}/api/request-email-code/`, {email, platform: 'web'}, {});
@@ -26,7 +26,7 @@ export function requestEmailCode(email: string, callback: () => void = () => {},
 }
 
 export function verifyEmailCode(code: string, email: string, callback: () => void, failCallback: () => void) {
-    return async function (dispatch: Dispatch) {
+    return async function(dispatch: Dispatch) {
         dispatch({type: progress.START_LOADING});
         const response = await axios.post(`${API}/api/verify-email-code/`, {code, email}, {});
         if (!response.data.correct) {
@@ -36,51 +36,62 @@ export function verifyEmailCode(code: string, email: string, callback: () => voi
             return;
         }
         await storage.setItem('@email', email);
-        handleCodeVerified(response, email, dispatch, callback);
+        handleUserVerified(response, email, 'email', dispatch, callback);
     };
 }
 
-async function handleCodeVerified(response: any, authId: string, dispatch: Dispatch, callback: () => void) {
+export function handleWalletVerified({ethereumAddress, callback} : {ethereumAddress: string, callback: () => void}) {
+    return async function(dispatch: Dispatch) {
+        try {
+            dispatch({type: progress.START_LOADING});
+            const response = await axios.post(`${API}/api/wallet-verified/`, {ethereumAddress});
+            await storage.setItem('@ethereumAddress', ethereumAddress);
+            handleUserVerified(
+                response,
+                ethereumAddress,
+                'wallet',
+                dispatch,
+                callback,
+            );
+        } catch (e) {
+            console.warn('ERROR', e);
+            dispatch({type: progress.END_LOADING});
+        }
+    };
+}
+
+async function handleUserVerified(response: any, authId: string, method: string, dispatch: Dispatch, callback: () => void) {
     globalData.limitedAccessToken = response.data.limitedAccessToken;
     await storage.setItem('#LimitedAccessToken', response.data.limitedAccessToken);
     await storage.setItem('@userId', response.data.userId);
     await storage.setItem('@username', response.data.username);
-    const phone = authId.startsWith('+') ? authId : null;
-    const email = authId.startsWith('+') ? null : authId;
+    const ethereumAddress = method === 'wallet' ? authId : null;
+    const email = method === 'email' ? authId : null;
     await dispatch({
         type: auth.DISPATCH_USER,
-        payload: {id: response.data.userId, phone, email, username: response.data.username},
+        payload: {id: response.data.userId, ethereumAddress, email, username: response.data.username},
     });
     globalData.passwordKey = response.data.passwordKey;
+    globalData.accountSecret = response.data.accountSecret;
     await storage.setItem('#PasswordSalt', response.data.passwordSalt);
     callback();
     dispatch({type: progress.END_LOADING});
 }
 
 export function login(password: string, callback: () => void) {
-    return async function (dispatch: Dispatch) {
+    return async function(dispatch: Dispatch) {
         dispatch({type: progress.START_LOADING});
         const token = globalData.limitedAccessToken;
         const config = {headers: {Authorization: token}};
-        const phone = await storage.getItem('@phone');
+        const ethereumAddress = await storage.getItem('@ethereumAddress');
         const email = await storage.getItem('@email');
-        const body: any = {phone, email};
+        const body: any = {ethereumAddress, email};
         const deviceId = 'deviceId';
         body.deviceId = deviceId;
         dispatch({type: app.CURRENT_DEVICE_ID, payload: deviceId});
         body.deviceName = getOSAndBrowser();
-
         const passwordSalt = await storage.getItem('#PasswordSalt');
-        const initialPasswordHash = await argon2.hash({
-            pass: password,
-            salt: base64.toByteArray(passwordSalt!),
-            type: argon2.ArgonType.Argon2id,
-            mem: 4 * 1024,
-            parallelism: 2,
-            time: 3,
-            hashLen: 32,
-        });
-        body.passwordHash = base64.fromByteArray(initialPasswordHash.hash);
+        body.passwordHash = await createPasswordHash(password, passwordSalt!);
         axios
             .post(`${API}/api/web-login/`, body, config)
             .then(async (response) => {
@@ -89,6 +100,7 @@ export function login(password: string, callback: () => void) {
                     dispatch({type: progress.END_LOADING});
                     globalData.limitedAccessToken = null;
                     globalData.passwordKey = null;
+                    globalData.accountSecret = null;
                     storage.removeItem('#LimitedAccessToken');
                     globalData.token = `Token ${response.data.token}`;
                     storage.setItem('#AuthToken', `Token ${response.data.token}`);
@@ -116,9 +128,10 @@ export function login(password: string, callback: () => void) {
 }
 
 export function logout(callback: () => void) {
-    return async function (dispatch: Dispatch) {
+    return async function(dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#AuthToken')) as string}};
         try {
+            await axios.get(`${API}/api/flush-session/`, config);
             await axios.post(`${API}/api/auth/logout/`, {}, config);
             await processLogout(dispatch, callback);
         } catch (e) {
@@ -151,7 +164,7 @@ async function processLogout(dispatch: Dispatch, callback: () => void) {
 }
 
 export function refreshUser() {
-    return async function (dispatch: Dispatch) {
+    return async function(dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#AuthToken')) as string}};
         let response;
         try {
@@ -166,7 +179,7 @@ export function refreshUser() {
 }
 
 export function fetchDevices() {
-    return async function (dispatch: Dispatch) {
+    return async function(dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#LimitedAccessToken')) as string}};
         const phone = await storage.getItem('@phone');
         const email = await storage.getItem('@email');
@@ -177,7 +190,8 @@ export function fetchDevices() {
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 alert('Your Session has expired, you need to verify your email/phone again');
-                await processLogout(dispatch, () => {});
+                await processLogout(dispatch, () => {
+                });
             } else {
                 alert(`Unknown Error: ${error.toString()}`);
             }

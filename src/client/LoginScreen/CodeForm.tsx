@@ -7,7 +7,7 @@ import {globalData} from '../../actions/globalVariables';
 import {IApplicationState} from '../../types';
 
 interface CodeFormProps extends PropsFromRedux {
-    setFormNumber: (number: number) => void;
+    setForm: (formName: string) => void;
 }
 
 const CodeForm: React.FC<CodeFormProps> = (props) => {
@@ -58,7 +58,7 @@ const CodeForm: React.FC<CodeFormProps> = (props) => {
             props.verifyEmailCode(
                 input,
                 props.email,
-                () => props.setFormNumber(2),
+                () => props.setForm('password'),
                 () => {
                     pinInputs.forEach((ref) => (ref.current!.value = ''));
                     pinInputs[0].current!.focus();
@@ -71,8 +71,8 @@ const CodeForm: React.FC<CodeFormProps> = (props) => {
     const resend = () => {
         props.requestEmailCode(
             globalData.authId,
-            () => props.setFormNumber(1),
-            () => props.setFormNumber(3),
+            () => props.setForm('code'),
+            () => props.setForm('qr'),
         );
     };
 

@@ -8,6 +8,7 @@ import SearchBar from '../SearchBar';
 import ProfileMenu from '../ProfileMenu';
 import AnimatedButton from '../Buttons/AnimatedButton';
 import {IApplicationState} from '../../types';
+import {FaWallet} from 'react-icons/fa6';
 
 interface NavBarState {
     active: boolean;
@@ -98,7 +99,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                                         setVisible={(value: boolean) => this.setState({visible: value})}
                                     />
                                 ) : (
-                                    <AnimatedButton text='Get Started' to='/portal-login' />
+                                    <AnimatedButton icon={<FaWallet color="#ffffff" size={18} />} text='Login' to='/portal-login' />
                                 )}
                             </div>
                         )
