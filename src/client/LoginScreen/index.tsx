@@ -48,11 +48,15 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
         <div className={gs.main}>
             <div className={`${gs.screenContainer} ${gs.centerScreen}`}>
                 <div className={gs.box}>
-                    {form === 'passwordRecovery' ?
-                        <h1>Password Recovery</h1> :
-                        form === 'qr' ?
-                            <h1>Download <span style={{fontFamily: 'Sirin Stencil'}}>Sticknet</span>app</h1>
-                            : <h1>Login to access your Vault</h1>}
+                    {form === 'passwordRecovery' ? (
+                        <h1>Password Recovery</h1>
+                    ) : form === 'qr' ? (
+                        <h1>
+                            Download <span style={{fontFamily: 'Sirin Stencil'}}>Sticknet</span>app
+                        </h1>
+                    ) : (
+                        <h1>Login to access your Vault</h1>
+                    )}
                     {form === 'authentication' ? (
                         <AuthenticationForm setForm={setForm} />
                     ) : form === 'code' ? (
@@ -61,11 +65,11 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
                         <PasswordForm setForm={setForm} />
                     ) : form === 'qr' ? (
                         <QRView />
-                    ) : form === 'passwordRecovery' ?
+                    ) : form === 'passwordRecovery' ? (
                         <PasswordRecovery />
-                        : form === 'walletPassword' ?
-                            <WalletPasswordForm setForm={setForm} />
-                            : null}
+                    ) : form === 'walletPassword' ? (
+                        <WalletPasswordForm setForm={setForm} />
+                    ) : null}
                 </div>
             </div>
         </div>

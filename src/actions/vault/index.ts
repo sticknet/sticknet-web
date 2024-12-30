@@ -124,12 +124,11 @@ export function uploadFiles(
                 axios
                     .put(uri, encryptedUris[uriKey]?.main, {
                         onUploadProgress: (e) => {
-                              dispatch({
+                            dispatch({
                                 type: upload.UPLOADING,
                                 payload: {progress: e.loaded / e.total, uriKey},
-                            })
-                        }
-
+                            });
+                        },
                     })
                     .then(async () => {
                         if (previewUri) axios.put(previewUri, encryptedUris[uriKey]?.preview);

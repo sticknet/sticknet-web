@@ -1,8 +1,8 @@
 import {fromByteArray, toByteArray} from 'base64-js';
 import argon2 from 'argon2-browser';
-import storage from 'redux-persist/lib/storage';
 import heic2any from 'heic2any';
 import {download} from '../actions/actionTypes';
+import secureStorage from './secureStorage';
 
 export function fileToArrayBuffer(file: Blob): Promise<ArrayBuffer> {
     return new Promise((resolve, reject) => {
@@ -266,7 +266,7 @@ async function decryptBlob(
 
 async function encryptFileVault(file: Blob): Promise<{blob: Blob; cipher: string} | null> {
     const response = await encryptBlob(file);
-    const password = await storage.getItem('#Password');
+    const password = await secureStorage.getItem('#Password');
     if (response && password) {
         const encrypted = await pbEncrypt(response.secret, password);
         return {blob: response.blob, cipher: encrypted.cipher + encrypted.salt};
@@ -284,7 +284,7 @@ async function decryptFileVault(
 ): Promise<{uri: string; heicUri?: string} | null> {
     const encryptedSecret = cipher.substring(0, cipher.length - 44);
     const salt = cipher.substring(cipher.length - 44);
-    const password = await storage.getItem('#Password');
+    const password = await secureStorage.getItem('#Password');
     if (password) {
         const secret = await pbDecrypt(encryptedSecret, salt, password);
         if (secret) {
@@ -295,7 +295,7 @@ async function decryptFileVault(
 }
 
 async function encryptTextVault(text: string): Promise<string | null> {
-    const password = await storage.getItem('#Password');
+    const password = await secureStorage.getItem('#Password');
     if (password) {
         const encrypted = await pbEncrypt(text, password);
         return encrypted.cipher + encrypted.salt;
@@ -306,7 +306,7 @@ async function encryptTextVault(text: string): Promise<string | null> {
 async function decryptTextVault(cipher: string): Promise<string | null> {
     const encryptedText = cipher.substring(0, cipher.length - 44);
     const salt = cipher.substring(cipher.length - 44);
-    const password = await storage.getItem('#Password');
+    const password = await secureStorage.getItem('#Password');
     if (password) {
         return pbDecrypt(encryptedText, salt, password);
     }
@@ -314,16 +314,24 @@ async function decryptTextVault(cipher: string): Promise<string | null> {
 }
 
 async function createPasswordHash(password: string, passwordSalt: string) {
-     const response = await argon2.hash({
-            pass: password,
-            salt: toByteArray(passwordSalt),
-            type: argon2.ArgonType.Argon2id,
-            mem: 4 * 1024,
-            parallelism: 2,
-            time: 3,
-            hashLen: 32,
-        });
-        return fromByteArray(response.hash);
+    const response = await argon2.hash({
+        pass: password,
+        salt: toByteArray(passwordSalt),
+        type: argon2.ArgonType.Argon2id,
+        mem: 4 * 1024,
+        parallelism: 2,
+        time: 3,
+        hashLen: 32,
+    });
+    return fromByteArray(response.hash);
 }
 
-export {encryptBlob, decryptBlob, encryptFileVault, decryptFileVault, encryptTextVault, decryptTextVault, createPasswordHash};
+export {
+    encryptBlob,
+    decryptBlob,
+    encryptFileVault,
+    decryptFileVault,
+    encryptTextVault,
+    decryptTextVault,
+    createPasswordHash,
+};

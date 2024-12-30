@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {TfiKey} from 'react-icons/tfi';
+import {useSignMessage} from 'wagmi';
+import {useHistory} from 'react-router-dom';
 import s from './style.css';
 import {Button} from '../../components';
 import {auth} from '../../actions';
 import {colors} from '../../foundations';
-import {useSignMessage} from 'wagmi';
 import {globalData} from '../../actions/globalVariables';
-import {useHistory} from 'react-router-dom';
 import {createPasswordHash} from '../../utils';
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
@@ -40,8 +40,15 @@ const WalletPasswordForm: React.FC<PasswordFormProps> = (props) => {
             <div className={s.keyCircle}>
                 <TfiKey size={60} color={colors.primary} />
             </div>
-            <p className={s.description} style={{fontSize: '18px'}}>Regenerate password from your wallet to login.</p>
-            <Button text="Sign & Generate password" id="continue" style={{marginTop: '32px'}} onClick={regeneratePassword} />
+            <p className={s.description} style={{fontSize: '18px'}}>
+                Regenerate password from your wallet to login.
+            </p>
+            <Button
+                text='Sign & Generate password'
+                id='continue'
+                style={{marginTop: '32px'}}
+                onClick={regeneratePassword}
+            />
         </div>
     );
 };

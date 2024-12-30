@@ -33,3 +33,4 @@ export const parseNumber = jest.fn().mockReturnValue('+1 234 567 890');
 export const getOSAndBrowser = jest.fn().mockReturnValue('Windows - Google Chrome');
 export const createPreview = jest.fn(() => Promise.resolve({size: 100, type: 'image/jpeg'}));
 export const createThumbnail = jest.fn(() => Promise.resolve({size: 100, type: 'image/jpeg'}));
+export const createPasswordHash = jest.fn((text) => Promise.resolve('encryptedText'));

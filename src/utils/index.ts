@@ -25,8 +25,10 @@ import {
     decryptFileVault,
     encryptTextVault,
     decryptTextVault,
-    createPasswordHash
+    createPasswordHash,
 } from './cryptography';
+
+import secureStorage from './secureStorage';
 
 export {
     parseNumber,
@@ -54,4 +56,5 @@ export {
     createPasswordHash,
     handleLinks,
     createFilesList,
+    secureStorage,
 };

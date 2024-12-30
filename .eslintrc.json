@@ -28,7 +28,7 @@
     "react-redux",
     "@typescript-eslint",
     "jest",
-//    "unused-imports"
+    "unused-imports"
   ],
   "settings": {
     "import/extensions": [

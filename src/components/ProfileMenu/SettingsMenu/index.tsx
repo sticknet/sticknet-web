@@ -6,12 +6,12 @@ import {useHistory} from 'react-router-dom';
 import {GrDiamond} from 'react-icons/gr';
 import {BiSolidBadgeCheck} from 'react-icons/bi';
 import {FaVault} from 'react-icons/fa6';
+import {useDisconnect} from 'wagmi';
 import SettingsItem from '../../SettingsItem';
 import s from './style.css';
 import {auth, iap} from '../../../actions';
 import {colors} from '../../../foundations';
 import {IApplicationState} from '../../../types';
-import {useDisconnect} from 'wagmi';
 
 interface SettingsMenuProps extends PropsFromRedux {
     visible: boolean;
@@ -64,7 +64,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = (props) => {
                     props.setVisible(false);
                     history.push('/');
                 });
-            }
+            },
         },
     ];
 

@@ -3,16 +3,13 @@ import {WagmiProvider} from 'wagmi';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {WagmiAdapter} from '@reown/appkit-adapter-wagmi';
 import {createAppKit} from '@reown/appkit/react';
-import {mainnet, arbitrum} from 'viem/chains';
+import {mainnet, arbitrum, optimism} from 'viem/chains';
 import siweConfig from './siweConfig';
 
-// 0. Setup queryClient
 const queryClient = new QueryClient();
 
-// 1. Get projectId from https://cloud.reown.com
 const projectId = '858fe7c1b740043cb35051384b89859b';
 
-// 2. Create a metadata object - optional
 const metadata = {
     name: 'Sticknet',
     description: 'Secure Social Storage',
@@ -22,17 +19,14 @@ const metadata = {
     ],
 };
 
-// 3. Set the networks
-const networks = [mainnet, arbitrum];
+const networks = [mainnet, arbitrum, optimism];
 
-// 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
-    networks: [mainnet, arbitrum],
+    networks,
     projectId,
     ssr: true,
 });
 
-// 5. Create modal
 createAppKit({
     adapters: [wagmiAdapter],
     networks: [mainnet, arbitrum],
@@ -41,12 +35,12 @@ createAppKit({
     features: {
         email: false,
         socials: [],
-        analytics: true, // Optional - defaults to your Cloud configuration
+        analytics: true,
     },
-    siweConfig
+    siweConfig,
 });
 
-const AppKitProvider: FC<{ children: ReactNode }> = ({ children }) => {
+const AppKitProvider: FC<{children: ReactNode}> = ({children}) => {
     return (
         <WagmiProvider config={wagmiAdapter.wagmiConfig}>
             <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

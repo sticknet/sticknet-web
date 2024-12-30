@@ -28,7 +28,7 @@ type Props = AnimatedButtonProps & PropsFromRedux;
 const AnimatedButton: React.FC<Props> = (props) => {
     if (props.clickable)
         return (
-            <button type="button" className={s.buttonContainer} onClick={props.onClick} style={{width: '50vw'}}>
+            <button type='button' className={s.buttonContainer} onClick={props.onClick} style={{width: '50vw'}}>
                 <span className={`${s.getStartedButton} ${props.style}`}>
                     {props.loading ? <Loading /> : <ButtonText icon={props.icon} text={props.text} />}
                 </span>
@@ -36,7 +36,9 @@ const AnimatedButton: React.FC<Props> = (props) => {
         );
     return (
         <Link className={s.buttonContainer} to={props.to || ''}>
-            <span className={`${s.getStartedButton} ${props.style}`}><ButtonText icon={props.icon} text={props.text} /></span>
+            <span className={`${s.getStartedButton} ${props.style}`}>
+                <ButtonText icon={props.icon} text={props.text} />
+            </span>
         </Link>
     );
 };

@@ -3,12 +3,12 @@ import {connect, ConnectedProps} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {FaLinkedin} from 'react-icons/fa';
 
+import {FaWallet} from 'react-icons/fa6';
 import s from './NavBar.css';
 import SearchBar from '../SearchBar';
 import ProfileMenu from '../ProfileMenu';
 import AnimatedButton from '../Buttons/AnimatedButton';
 import {IApplicationState} from '../../types';
-import {FaWallet} from 'react-icons/fa6';
 
 interface NavBarState {
     active: boolean;
@@ -99,7 +99,11 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                                         setVisible={(value: boolean) => this.setState({visible: value})}
                                     />
                                 ) : (
-                                    <AnimatedButton icon={<FaWallet color="#ffffff" size={18} />} text='Login' to='/portal-login' />
+                                    <AnimatedButton
+                                        icon={<FaWallet color='#ffffff' size={18} />}
+                                        text='Login'
+                                        to='/portal-login'
+                                    />
                                 )}
                             </div>
                         )

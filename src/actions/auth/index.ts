@@ -1,15 +1,14 @@
 import storage from 'redux-persist/lib/storage';
 import {Dispatch} from 'redux';
-import {progress, app, auth, vault, fetched, appTemp} from '../actionTypes';
+import {fromByteArray} from 'base64-js';
+import {app, appTemp, auth, fetched, progress, vault} from '../actionTypes';
 import {globalData} from '../globalVariables';
 import axios from '../myaxios';
 import {API} from '../URL';
-import {createPasswordHash, getOSAndBrowser} from '../../utils';
+import {createPasswordHash, getOSAndBrowser, secureStorage} from '../../utils';
 
-export function requestEmailCode(email: string, callback: () => void = () => {
-}, failCallback: () => void = () => {
-}) {
-    return async function(dispatch: Dispatch) {
+export function requestEmailCode(email: string, callback: () => void = () => {}, failCallback: () => void = () => {}) {
+    return async function (dispatch: Dispatch) {
         globalData.authId = email;
         dispatch({type: progress.START_LOADING});
         const {data} = await axios.post(`${API}/api/request-email-code/`, {email, platform: 'web'}, {});
@@ -26,7 +25,7 @@ export function requestEmailCode(email: string, callback: () => void = () => {
 }
 
 export function verifyEmailCode(code: string, email: string, callback: () => void, failCallback: () => void) {
-    return async function(dispatch: Dispatch) {
+    return async function (dispatch: Dispatch) {
         dispatch({type: progress.START_LOADING});
         const response = await axios.post(`${API}/api/verify-email-code/`, {code, email}, {});
         if (!response.data.correct) {
@@ -40,19 +39,13 @@ export function verifyEmailCode(code: string, email: string, callback: () => voi
     };
 }
 
-export function handleWalletVerified({ethereumAddress, callback} : {ethereumAddress: string, callback: () => void}) {
-    return async function(dispatch: Dispatch) {
+export function handleWalletVerified({ethereumAddress, callback}: {ethereumAddress: string; callback: () => void}) {
+    return async function (dispatch: Dispatch) {
         try {
             dispatch({type: progress.START_LOADING});
             const response = await axios.post(`${API}/api/wallet-verified/`, {ethereumAddress});
             await storage.setItem('@ethereumAddress', ethereumAddress);
-            handleUserVerified(
-                response,
-                ethereumAddress,
-                'wallet',
-                dispatch,
-                callback,
-            );
+            handleUserVerified(response, ethereumAddress, 'wallet', dispatch, callback);
         } catch (e) {
             console.warn('ERROR', e);
             dispatch({type: progress.END_LOADING});
@@ -60,7 +53,13 @@ export function handleWalletVerified({ethereumAddress, callback} : {ethereumAddr
     };
 }
 
-async function handleUserVerified(response: any, authId: string, method: string, dispatch: Dispatch, callback: () => void) {
+async function handleUserVerified(
+    response: any,
+    authId: string,
+    method: string,
+    dispatch: Dispatch,
+    callback: () => void,
+) {
     globalData.limitedAccessToken = response.data.limitedAccessToken;
     await storage.setItem('#LimitedAccessToken', response.data.limitedAccessToken);
     await storage.setItem('@userId', response.data.userId);
@@ -78,8 +77,28 @@ async function handleUserVerified(response: any, authId: string, method: string,
     dispatch({type: progress.END_LOADING});
 }
 
+export function getWebKey() {
+    return async function () {
+        const authToken = await storage.getItem('#AuthToken');
+        const config = {headers: {Authorization: authToken as string}};
+        const response = await axios.get(`${API}/api/get-web-key/`, config);
+        if (response.data.webKey) {
+            globalData.webKey = response.data.webKey;
+        } else {
+            setWebKey(authToken as string);
+        }
+    };
+}
+
+const setWebKey = (authToken: string) => {
+    const webKeyBytes = window.crypto.getRandomValues(new Uint8Array(32));
+    globalData.webKey = fromByteArray(webKeyBytes);
+    const config = {headers: {Authorization: authToken}};
+    axios.post(`${API}/api/set-web-key/`, {webKey: globalData.webKey}, config);
+};
+
 export function login(password: string, callback: () => void) {
-    return async function(dispatch: Dispatch) {
+    return async function (dispatch: Dispatch) {
         dispatch({type: progress.START_LOADING});
         const token = globalData.limitedAccessToken;
         const config = {headers: {Authorization: token}};
@@ -96,7 +115,8 @@ export function login(password: string, callback: () => void) {
             .post(`${API}/api/web-login/`, body, config)
             .then(async (response) => {
                 if (response.data.correct) {
-                    await storage.setItem('#Password', password);
+                    if (!response.data.webKey) setWebKey(`Token ${response.data.token}`);
+                    await secureStorage.setItem('#Password', password);
                     dispatch({type: progress.END_LOADING});
                     globalData.limitedAccessToken = null;
                     globalData.passwordKey = null;
@@ -128,7 +148,7 @@ export function login(password: string, callback: () => void) {
 }
 
 export function logout(callback: () => void) {
-    return async function(dispatch: Dispatch) {
+    return async function (dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#AuthToken')) as string}};
         try {
             await axios.get(`${API}/api/flush-session/`, config);
@@ -164,11 +184,13 @@ async function processLogout(dispatch: Dispatch, callback: () => void) {
 }
 
 export function refreshUser() {
-    return async function(dispatch: Dispatch) {
-        const config = {headers: {Authorization: (await storage.getItem('#AuthToken')) as string}};
+    return async function (dispatch: Dispatch) {
+        const authToken = await storage.getItem('#AuthToken');
+        const config = {headers: {Authorization: authToken as string}};
         let response;
         try {
-            response = await axios.get(`${API}/api/refresh-user/`, config);
+            response = await axios.get(`${API}/api/refresh-user/?web=1`, config);
+            // if (!response.data.webKey) setWebKey(authToken as string);
         } catch (e) {
             processLogout(dispatch, () => (window.location.href = '/portal-login'));
         }
@@ -179,7 +201,7 @@ export function refreshUser() {
 }
 
 export function fetchDevices() {
-    return async function(dispatch: Dispatch) {
+    return async function (dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#LimitedAccessToken')) as string}};
         const phone = await storage.getItem('@phone');
         const email = await storage.getItem('@email');
@@ -190,8 +212,7 @@ export function fetchDevices() {
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 alert('Your Session has expired, you need to verify your email/phone again');
-                await processLogout(dispatch, () => {
-                });
+                await processLogout(dispatch, () => {});
             } else {
                 alert(`Unknown Error: ${error.toString()}`);
             }
