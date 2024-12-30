@@ -1,4 +1,4 @@
-import {pbDecrypt, pbEncrypt} from './cryptography';
+import {pbDecrypt, pbEncrypt} from './pbEncryption';
 import {globalData} from '../actions/globalVariables';
 
 const secureStorage = (() => {

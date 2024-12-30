@@ -19,14 +19,14 @@ import {
 import {
     encryptBlob,
     decryptBlob,
-    pbEncrypt,
-    pbDecrypt,
     encryptFileVault,
     decryptFileVault,
     encryptTextVault,
     decryptTextVault,
     createPasswordHash,
 } from './cryptography';
+
+import {pbEncrypt, pbDecrypt} from './pbEncryption';
 
 import secureStorage from './secureStorage';
 

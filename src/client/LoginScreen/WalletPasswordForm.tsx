@@ -12,11 +12,7 @@ import {createPasswordHash} from '../../utils';
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface PasswordFormProps extends PropsFromRedux {
-    setForm: (formName: string) => void;
-}
-
-const WalletPasswordForm: React.FC<PasswordFormProps> = (props) => {
+const WalletPasswordForm: React.FC<PropsFromRedux> = (props) => {
     const {data, signMessage} = useSignMessage();
     const history = useHistory();
     const regeneratePassword = () => {

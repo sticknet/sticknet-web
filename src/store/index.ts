@@ -11,6 +11,7 @@ const persistConfig = {
     whitelist,
 };
 
+// eslint-disable-next-line import/no-mutable-exports
 let store: Store;
 let persistor: Persistor;
 

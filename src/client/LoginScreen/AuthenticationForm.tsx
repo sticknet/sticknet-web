@@ -1,6 +1,7 @@
 import React, {useEffect, useState, ChangeEvent} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {FaEnvelope, FaWallet} from 'react-icons/fa6';
+// eslint-disable-next-line import/no-unresolved
 import {useAppKit} from '@reown/appkit/react';
 import s from './style.css';
 import {Button} from '../../components';

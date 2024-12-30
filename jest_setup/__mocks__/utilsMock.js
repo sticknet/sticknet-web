@@ -34,3 +34,4 @@ export const getOSAndBrowser = jest.fn().mockReturnValue('Windows - Google Chrom
 export const createPreview = jest.fn(() => Promise.resolve({size: 100, type: 'image/jpeg'}));
 export const createThumbnail = jest.fn(() => Promise.resolve({size: 100, type: 'image/jpeg'}));
 export const createPasswordHash = jest.fn((text) => Promise.resolve('encryptedText'));
+export const secureStorage = {getItem: jest.fn(), setItem: jest.fn()};

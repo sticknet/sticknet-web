@@ -33,6 +33,7 @@ const axiosMock = () => {
         correct: true,
         token: 'token',
         user: {id: 'userX', email: 'test@test.com', groups: [{id: 'groupX'}]},
+        webKey: 'webKey',
     });
     mock.onPost(`${mockURL}/api/upload-pkb/`).reply(200, {
         partyId: 'partyIdX',

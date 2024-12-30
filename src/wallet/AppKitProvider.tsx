@@ -2,6 +2,7 @@ import React, {FC, ReactNode} from 'react';
 import {WagmiProvider} from 'wagmi';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {WagmiAdapter} from '@reown/appkit-adapter-wagmi';
+// eslint-disable-next-line import/no-unresolved
 import {createAppKit} from '@reown/appkit/react';
 import {mainnet, arbitrum, optimism} from 'viem/chains';
 import siweConfig from './siweConfig';
