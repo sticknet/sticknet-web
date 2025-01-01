@@ -80,7 +80,6 @@ type RootContainerProps = ConnectedProps<typeof connector>;
 
 class RootContainerComponent extends PureComponent<RootContainerProps> {
     componentDidMount() {
-        console.log('ggg', globalData.webKey);
         if (this.props.user && !globalData.webKey) {
             this.props.getWebKey();
         }
