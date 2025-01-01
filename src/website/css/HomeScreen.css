@@ -50,11 +50,6 @@
         justify-content: space-between;
     }
 
-    .titleContainer {
-
-    }
-
-
     .socialIcon {
         font-size: 1.25vw;
         color: var(--black)
@@ -110,6 +105,14 @@
         font-size: 3vw;
         color: #ffffff;
         font-weight: bold;
+    }
+
+    .subtitle {
+        font-size: 1.3vw;
+        margin-top: 3vh;
+        color: #FFFFFF;
+        text-align: left;
+        line-height: 1.5;
     }
 
     .heading {

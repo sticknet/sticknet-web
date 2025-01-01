@@ -15,6 +15,7 @@ import {
     validateEmail,
     handleLinks,
     createFilesList,
+    shortenAddress,
 } from './common';
 import {
     encryptBlob,
@@ -57,4 +58,5 @@ export {
     handleLinks,
     createFilesList,
     secureStorage,
+    shortenAddress,
 };

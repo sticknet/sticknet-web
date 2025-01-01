@@ -16,7 +16,7 @@ const metadata = {
     description: 'Secure Social Storage',
     url: 'https://sticknet.org',
     icons: [
-        'https://firebasestorage.googleapis.com/v0/b/stiiick-1545628981656.appspot.com/o/sticknet-icon.png?alt=media&token=2b665dae-a63d-4884-a92e-59d5899530dc',
+        'https://firebasestorage.googleapis.com/v0/b/stiiick-1545628981656.appspot.com/o/sticknet-small.png?alt=media&token=145ee059-7a0f-42b4-b03e-7547a0429411',
     ],
 };
 

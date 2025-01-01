@@ -43,9 +43,11 @@ export function handleWalletVerified({ethereumAddress, callback}: {ethereumAddre
     return async function (dispatch: Dispatch) {
         try {
             dispatch({type: progress.START_LOADING});
-            const response = await axios.post(`${API}/api/wallet-verified/`, {ethereumAddress});
+            // const response = await axios.post(`${API}/api/wallet-verified/`, {ethereumAddress});
             await storage.setItem('@ethereumAddress', ethereumAddress);
-            handleUserVerified(response, ethereumAddress, 'wallet', dispatch, callback);
+            const walletVerifyResponse = globalData.walletVerifyResponse;
+            globalData.walletVerifyResponse = null;
+            handleUserVerified(walletVerifyResponse, ethereumAddress, 'wallet', dispatch, callback);
         } catch (e) {
             console.warn('ERROR', e);
             dispatch({type: progress.END_LOADING});
@@ -85,16 +87,16 @@ export function getWebKey() {
         if (response.data.webKey) {
             globalData.webKey = response.data.webKey;
         } else {
-            setWebKey(authToken as string);
+            await setWebKey(authToken as string);
         }
     };
 }
 
-const setWebKey = (authToken: string) => {
+const setWebKey = async (authToken: string) => {
     const webKeyBytes = window.crypto.getRandomValues(new Uint8Array(32));
     globalData.webKey = fromByteArray(webKeyBytes);
     const config = {headers: {Authorization: authToken}};
-    axios.post(`${API}/api/set-web-key/`, {webKey: globalData.webKey}, config);
+    await axios.post(`${API}/api/set-web-key/`, {webKey: globalData.webKey}, config);
 };
 
 export function login(password: string, callback: () => void) {
@@ -115,7 +117,8 @@ export function login(password: string, callback: () => void) {
             .post(`${API}/api/web-login/`, body, config)
             .then(async (response) => {
                 if (response.data.correct) {
-                    if (!response.data.webKey) setWebKey(`Token ${response.data.token}`);
+                    if (!response.data.webKey) await setWebKey(`Token ${response.data.token}`);
+                    else globalData.webKey = response.data.webKey;
                     await secureStorage.setItem('#Password', password);
                     dispatch({type: progress.END_LOADING});
                     globalData.limitedAccessToken = null;
@@ -190,7 +193,6 @@ export function refreshUser() {
         let response;
         try {
             response = await axios.get(`${API}/api/refresh-user/?web=1`, config);
-            // if (!response.data.webKey) setWebKey(authToken as string);
         } catch (e) {
             processLogout(dispatch, () => (window.location.href = '/portal-login'));
         }

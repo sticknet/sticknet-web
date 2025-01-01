@@ -18,6 +18,7 @@ interface NavBarState {
 
 const mapStateToProps = (state: IApplicationState) => ({
     user: state.auth.user,
+    isAuthenticated: state.auth.isAuthenticated,
 });
 
 const connector = connect(mapStateToProps);
@@ -53,7 +54,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
     render() {
         const isDesktop = window.innerWidth > window.innerHeight;
         const isVault = window.location.pathname.includes('vault');
-        const {user} = this.props;
+        const {user, isAuthenticated} = this.props;
         const edgeStyle = isVault || user ? s.shadow : s.border;
 
         return (
@@ -73,13 +74,13 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                 </Link>
                 {isVault && <SearchBar />}
                 {isDesktop ? (
-                    isVault || user ? (
+                    isVault || isAuthenticated ? (
                         <ProfileMenu
                             visible={this.state.visible}
                             setVisible={(value: boolean) => this.setState({visible: value})}
                         />
                     ) : (
-                        !user && (
+                        !isAuthenticated && (
                             <div className={s.headerRightContainer}>
                                 <a className={s.headerLink} href={`${window.location.origin}#get-sticknet`}>
                                     <span>Get Sticknet</span>
@@ -93,7 +94,7 @@ class NavBar extends Component<NavBarProps, NavBarState> {
                                 <Link className={s.headerLink} to='/premium'>
                                     <span>Pricing</span>
                                 </Link>
-                                {this.props.user ? (
+                                {isAuthenticated ? (
                                     <ProfileMenu
                                         visible={this.state.visible}
                                         setVisible={(value: boolean) => this.setState({visible: value})}

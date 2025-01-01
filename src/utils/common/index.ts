@@ -371,3 +371,10 @@ export function handleLinks(elementId: string): void {
     // Update the container's content with the clickable links
     container.innerHTML = updatedContent;
 }
+
+export function shortenAddress(address: string) {
+    if (!address.startsWith('0x') || address.length < 42) {
+        throw new Error('Invalid Ethereum address');
+    }
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}

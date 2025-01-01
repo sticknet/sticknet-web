@@ -68,7 +68,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
                     ) : form === 'passwordRecovery' ? (
                         <PasswordRecovery />
                     ) : form === 'walletPassword' ? (
-                        <WalletPasswordForm setForm={setForm} />
+                        <WalletPasswordForm />
                     ) : null}
                 </div>
             </div>

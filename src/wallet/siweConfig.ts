@@ -9,6 +9,7 @@ import {API} from '../actions/URL';
 import axios from '../actions/myaxios';
 import {store} from '../store';
 import {appTemp} from '../actions/actionTypes';
+import {globalData} from '../actions/globalVariables';
 
 const siweConfig = createSIWEConfig({
     getNonce: async (): Promise<string> => {
@@ -24,7 +25,8 @@ const siweConfig = createSIWEConfig({
             // has not been tampered with, and has been appropriately
             // signed by the wallet address.
             const res = await axios.post(`${API}/api/verify-siwe/`, {message, signature});
-            return res.data;
+            globalData.walletVerifyResponse = res;
+            return res.data.correct;
         } catch (error) {
             return false;
         }

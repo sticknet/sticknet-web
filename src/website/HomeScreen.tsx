@@ -42,9 +42,9 @@ const HomeScreen: React.FC<HomeScreenProps> = (props) => {
                     }}>
                     <div className={`${s.section} ${s.headerSection}`}>
                         <div style={{marginTop: '15vh'}}>
-                            <p className={s.title}>Own your privacy.</p>
-                            <p className={s.description}>Secure Social Storage Platform.</p>
-                            <p className={`${s.description} ${s.subDescription}`}>
+                            <p className={s.title}>Web3 Social Storage</p>
+                            {/* <p className={s.subtitle}>Own your privacy.</p> */}
+                            <p className={`${s.subtitle}`}>
                                 Sticknet isn't just secure and private, but also rich and powerful!
                             </p>
                             <div className={s.storeContainer}>
