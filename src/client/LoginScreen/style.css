@@ -83,6 +83,33 @@ input[type="number"] {
     -moz-appearance: textfield; /* Firefox */
 }
 
+.separatorContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px 0;
+}
+
+.line {
+    width: 240px;
+    height: 1px;
+    background-color: lightgrey;
+}
+
+.orText {
+    color: grey;
+    padding: 0 8px;
+}
+
+
+.sticknetIcon {
+    border-radius: 60px;
+    width: 100px;
+    height: 100px;
+    margin-top: 40px;
+}
+
+
 /* CODE INPUT FORM */
 
 .pinContainer {

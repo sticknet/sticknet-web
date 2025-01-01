@@ -15,17 +15,21 @@ import {
     validateEmail,
     handleLinks,
     createFilesList,
+    shortenAddress,
 } from './common';
 import {
     encryptBlob,
     decryptBlob,
-    pbEncrypt,
-    pbDecrypt,
     encryptFileVault,
     decryptFileVault,
     encryptTextVault,
     decryptTextVault,
+    createPasswordHash,
 } from './cryptography';
+
+import {pbEncrypt, pbDecrypt} from './pbEncryption';
+
+import secureStorage from './secureStorage';
 
 export {
     parseNumber,
@@ -50,6 +54,9 @@ export {
     validateEmail,
     encryptTextVault,
     decryptTextVault,
+    createPasswordHash,
     handleLinks,
     createFilesList,
+    secureStorage,
+    shortenAddress,
 };

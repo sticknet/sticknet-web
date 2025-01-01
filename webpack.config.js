@@ -1,13 +1,13 @@
 const {
-    sentryWebpackPlugin
-} = require("@sentry/webpack-plugin");
+    sentryWebpackPlugin,
+} = require('@sentry/webpack-plugin');
 
-const path = require("path");
-const {DefinePlugin} = require("webpack");
-const BundleTracker = require("webpack-bundle-tracker");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const path = require('path');
+const {DefinePlugin} = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, argv) => {
     return {
@@ -15,43 +15,43 @@ module.exports = (env, argv) => {
 
         context: __dirname,
         watch: true,
-        entry: "./src/index.tsx",
+        entry: './src/index.tsx',
 
         output: {
             path: path.resolve(__dirname, '../sticknet-engine/webpack/assets/bundles/'),
-            filename: "[name]-[hash].js",
+            filename: '[name]-[hash].js',
         },
 
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             fallback: {
-                "path": require.resolve("path-browserify"),
-                "fs": false,
-            }
+                'path': require.resolve('path-browserify'),
+                'fs': false,
+            },
         },
 
         experiments: {
-            asyncWebAssembly: true
+            asyncWebAssembly: true,
         },
 
         devServer: {
             contentBase: path.resolve('../sticknet-engine/webpack/assets/bundles/'),
             hot: true,
             port: 8080,
-            publicPath: "/",
+            publicPath: '/',
         },
 
         plugins: [
-            new BundleTracker({filename: "../sticknet-engine/webpack/webpack-stats.json"}),
+            new BundleTracker({filename: '../sticknet-engine/webpack/webpack-stats.json'}),
             new DefinePlugin({
-                "process.env.NODE_ENV": JSON.stringify(argv.mode),
+                'process.env.NODE_ENV': JSON.stringify(argv.mode),
             }),
             new CleanWebpackPlugin(),
             sentryWebpackPlugin({
                 authToken: process.env.SENTRY_AUTH_TOKEN,
-                org: "sticknet",
-                project: "web"
-            })
+                org: 'sticknet',
+                project: 'web',
+            }),
         ],
 
         optimization: argv.mode === 'production' ? {
@@ -66,36 +66,36 @@ module.exports = (env, argv) => {
                     test: /\.tsx?$/,
                     exclude: /node_modules/,
                     use: {
-                        loader: "ts-loader",
+                        loader: 'ts-loader',
                     },
                 },
                 {
                     test: /\.js$/,
                     exclude: /node_modules/,
                     use: {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
-                            presets: ["@babel/preset-env"],
+                            presets: ['@babel/preset-env'],
                         },
                     },
                 },
                 {
                     test: /\.(png|jpg|jpeg|ttf)$/,
-                    loader: "url-loader",
+                    loader: 'url-loader',
                     options: {
                         limit: 8192,
-                        name: "[name].[ext]",
+                        name: '[name].[ext]',
                     },
                 },
                 {
                     test: /\.css$/,
                     use: [
-                        "style-loader",
+                        'style-loader',
                         {
-                            loader: "css-loader",
+                            loader: 'css-loader',
                             options: {
                                 modules: {
-                                    localIdentName: "[name]__[local]___[hash:base64:5]",
+                                    localIdentName: '[name]__[local]___[hash:base64:5]',
                                 },
                             },
                         },
@@ -103,12 +103,12 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.wasm$/,
-                    loader: "base64-loader",
-                    type: "javascript/auto",
+                    loader: 'base64-loader',
+                    type: 'javascript/auto',
                 },
             ],
         },
 
-        devtool: "source-map"
-    }
+        devtool: 'source-map',
+    };
 };

@@ -13,6 +13,7 @@ export interface IAppTempState {
     movingFile: TFile | null;
     emptySearch: boolean;
     isSearching: boolean;
+    walletVerified: string | null;
     cancelMenus: number;
     devices: TDevice[];
 }
@@ -94,6 +95,7 @@ export const appTempInitialState: IAppTempState = {
     fileView: {visible: false, index: null, type: 'files'},
     fileTempLoaded: {},
     renamingFile: null,
+    walletVerified: null,
     movingFile: null,
     emptySearch: false,
     isSearching: false,

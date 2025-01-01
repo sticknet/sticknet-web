@@ -1,5 +1,5 @@
-import {applyMiddleware, createStore} from 'redux';
-import {persistReducer, persistStore} from 'redux-persist';
+import {applyMiddleware, createStore, Store} from 'redux';
+import {Persistor, persistReducer, persistStore} from 'redux-persist';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 import reducers from '../reducers';
@@ -11,13 +11,19 @@ const persistConfig = {
     whitelist,
 };
 
+// eslint-disable-next-line import/no-mutable-exports
+let store: Store;
+let persistor: Persistor;
+
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default function configureStore(preloadedState: object = {}) {
-    const store = createStore(persistedReducer, preloadedState, applyMiddleware(thunk));
-    const persistor = persistStore(store);
+    store = createStore(persistedReducer, preloadedState, applyMiddleware(thunk));
+    persistor = persistStore(store);
     return {
         store,
         persistor,
     };
 }
+
+export {store, persistStore};

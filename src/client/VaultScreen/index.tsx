@@ -116,10 +116,6 @@ const VaultScreen: React.FC<VaultScreenProps> = (props) => {
         setContextMenuVisible(false);
     };
 
-    const handleCloseContextMenu = () => {
-        setContextMenuVisible(false);
-    };
-
     const handleContextMenu = (e: MouseEvent<HTMLDivElement>, item: TFile) => {
         e.preventDefault();
         if (item.folderType === 'camera_uploads') return;

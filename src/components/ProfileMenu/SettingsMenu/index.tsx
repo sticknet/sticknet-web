@@ -6,11 +6,13 @@ import {useHistory} from 'react-router-dom';
 import {GrDiamond} from 'react-icons/gr';
 import {BiSolidBadgeCheck} from 'react-icons/bi';
 import {FaVault} from 'react-icons/fa6';
+import {ConnectionController} from '@reown/appkit-core';
 import SettingsItem from '../../SettingsItem';
 import s from './style.css';
 import {auth, iap} from '../../../actions';
 import {colors} from '../../../foundations';
-import {IApplicationState} from '../../../types'; // Adjust the import path as necessary
+import {IApplicationState} from '../../../types';
+import {shortenAddress} from '../../../utils';
 
 interface SettingsMenuProps extends PropsFromRedux {
     visible: boolean;
@@ -56,11 +58,13 @@ const SettingsMenu: React.FC<SettingsMenuProps> = (props) => {
         {
             text: 'Log Out',
             icon: <AiOutlinePoweroff color='#0F0F28' />,
-            onClick: () =>
+            onClick: async () => {
+                await ConnectionController.disconnect();
                 props.logout(() => {
                     props.setVisible(false);
                     history.push('/');
-                }),
+                });
+            },
         },
     ];
 
@@ -85,9 +89,15 @@ const SettingsMenu: React.FC<SettingsMenuProps> = (props) => {
                 <p className={s.email}>
                     Username: <b>@{props.user?.username}</b>
                 </p>
-                <p className={s.email}>
-                    Email: <b>{props.user?.email}</b>
-                </p>
+                {props.user?.email ? (
+                    <p className={s.email}>
+                        Email: <b>{props.user?.email}</b>
+                    </p>
+                ) : (
+                    <p className={s.email}>
+                        Wallet Address: <b>{shortenAddress(props.user?.ethereumAddress)}</b>
+                    </p>
+                )}
             </div>
             {actions.map((item) => (
                 <SettingsItem
