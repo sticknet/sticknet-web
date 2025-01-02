@@ -10,7 +10,7 @@
     "@sentry/webpack-plugin": "^2.10.2",
     "@tanstack/react-query": "^5.62.11",
     "argon2-browser": "^1.18.0",
-    "axios": "0.24.0",
+    "axios": "0.29.0",
     "base64-js": "^1.5.1",
     "django-react-csrftoken": "^1.0.3",
     "framer-motion": "^10.15.0",
