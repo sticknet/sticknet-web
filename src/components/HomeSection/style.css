@@ -1,0 +1,76 @@
+@media screen and (max-width: 1100px) {
+    .sectionContainer {
+        width: 100vw;
+        padding-top: 10vw;
+        padding-bottom: 10vw;
+        display: flex;
+        height: 80vh;
+    }
+
+    .section {
+        width: 90%;
+        margin-left: 5vw;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        padding-top: 5vh;
+    }
+
+    .heading {
+        font-size: 7vw;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 5vw;
+        margin-top: 5vh;
+        color: #FFFFFF;
+        text-align: left;
+        line-height: 1.5;
+    }
+
+    .description2 {
+        color: var(--black);
+        font-size: 4.5vw;
+    }
+
+}
+
+
+@media screen and (min-width: 1100px) {
+    .sectionContainer {
+        width: 100vw;
+        padding-top: 10vw;
+        padding-bottom: 10vw;
+        display: flex;
+        height: 40vh;
+    }
+
+    .section {
+        width: 80%;
+        margin-left: 10vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .heading {
+        font-size: 2.5vw;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 1.2vw;
+        margin-top: 3vh;
+        color: #FFFFFF;
+        text-align: left;
+        line-height: 1.5;
+    }
+
+    .description2 {
+        color: var(--black);
+        font-size: 1vw;
+        width: 90%
+    }
+
+}

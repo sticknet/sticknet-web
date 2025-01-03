@@ -9,3 +9,4 @@ export const premiumAnimation = require('./premiumAnimation.json')
 export const celebrateAnimation = require('./celebrateAnimation.json')
 export const decentralizedAnimation = require('./decentralizedAnimation.json')
 export const socialAnimation = require('./socialAnimation.json');
+export const ethereumAnimation = require('./ethereumAnimation.json');
