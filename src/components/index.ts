@@ -18,6 +18,7 @@ import Table from './Table';
 import EmptyContent from './EmptyContent';
 import CloudVaultIcon from './CloudVaultIcon';
 import TableChats from './Table/TableChats';
+import HomeSection from './HomeSection';
 
 export {
     DevicesImage,
@@ -40,4 +41,5 @@ export {
     EmptyContent,
     CloudVaultIcon,
     TableChats,
+    HomeSection,
 };

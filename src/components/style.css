@@ -43,7 +43,7 @@
         width: 33vh;
         position: absolute;
         left: -8vw;
-        top: 60vh;
+        top: 50vh;
         z-index: 1;
     }
 
@@ -52,7 +52,7 @@
         width: 32vh;
         position: absolute;
         left: 32vw;
-        top: 63vh;
+        top: 53vh;
     }
 }
 

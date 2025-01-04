@@ -26,7 +26,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (props.isAuthenticated) {
+        if (props.isAuthenticated && props.user) {
             window.location.href = '/vault/files';
         }
         const unlisten = history.listen((location, action) => {
@@ -80,6 +80,7 @@ const mapStateToProps = (state: IApplicationState) => ({
     country: state.appTemp.country,
     phone: state.app.phone,
     isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user,
 });
 
 const connector = connect(mapStateToProps, {...auth});
