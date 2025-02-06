@@ -1,6 +1,7 @@
 import storage from 'redux-persist/lib/storage';
 import {Dispatch} from 'redux';
 import {fromByteArray} from 'base64-js';
+import {ConnectionController} from '@reown/appkit-core';
 import {app, appTemp, auth, fetched, progress, vault} from '../actionTypes';
 import {globalData} from '../globalVariables';
 import axios from '../myaxios';
@@ -34,19 +35,38 @@ export function verifyEmailCode(code: string, email: string, callback: () => voi
             failCallback();
             return;
         }
+        await storage.removeItem('@ethereumAddress');
         await storage.setItem('@email', email);
         handleUserVerified(response, email, 'email', dispatch, callback);
     };
 }
 
-export function handleWalletVerified({ethereumAddress, callback}: {ethereumAddress: string; callback: () => void}) {
+export function handleWalletVerified({
+    ethereumAddress,
+    callback,
+    failCallback,
+}: {
+    ethereumAddress: string;
+    callback: () => void;
+    failCallback: () => void;
+}) {
     return async function (dispatch: Dispatch) {
         try {
             dispatch({type: progress.START_LOADING});
-            // const response = await axios.post(`${API}/api/wallet-verified/`, {ethereumAddress});
+            await storage.removeItem('@email');
             await storage.setItem('@ethereumAddress', ethereumAddress);
             const walletVerifyResponse = globalData.walletVerifyResponse;
             globalData.walletVerifyResponse = null;
+            if (!walletVerifyResponse.exists) {
+                failCallback();
+                dispatch({type: progress.END_LOADING});
+                setTimeout(() => alert('You need to create an account!'), 100);
+                setTimeout(async () => {
+                    await axios.get(`${API}/api/flush-session/`);
+                    ConnectionController.disconnect();
+                }, 10000);
+                return;
+            }
             handleUserVerified(walletVerifyResponse, ethereumAddress, 'wallet', dispatch, callback);
         } catch (e) {
             console.warn('ERROR', e);
@@ -154,7 +174,7 @@ export function logout(callback: () => void) {
     return async function (dispatch: Dispatch) {
         const config = {headers: {Authorization: (await storage.getItem('#AuthToken')) as string}};
         try {
-            await axios.get(`${API}/api/flush-session/`, config);
+            await axios.get(`${API}/api/flush-session/`);
             await axios.post(`${API}/api/auth/logout/`, {}, config);
             await processLogout(dispatch, callback);
         } catch (e) {

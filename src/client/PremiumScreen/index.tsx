@@ -102,7 +102,7 @@ const PremiumScreen: React.FC<PremiumScreenProps> = (props) => {
                                 <Button
                                     text={
                                         props.user
-                                            ? 'Try free for 30 days&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;Proceed to checkout'
+                                            ? 'Try free for 30 days • Proceed to checkout'
                                             : 'Try free for 30 days'
                                     }
                                     colored

@@ -35,6 +35,7 @@ const AuthenticationForm: React.FC<AuthenticationFormProps> = (props) => {
             props.handleWalletVerified({
                 ethereumAddress: props.walletVerified,
                 callback: () => props.setForm('walletPassword'),
+                failCallback: () => props.setForm('qr'),
             });
     }, [props.walletVerified]);
 

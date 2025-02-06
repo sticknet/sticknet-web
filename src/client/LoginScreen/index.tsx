@@ -52,7 +52,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
                         <h1>Password Recovery</h1>
                     ) : form === 'qr' ? (
                         <h1>
-                            Download <span style={{fontFamily: 'Sirin Stencil'}}>Sticknet</span>app
+                            Download <span style={{fontFamily: 'Sirin Stencil'}}>Sticknet</span> app
                         </h1>
                     ) : (
                         <h1>Login to access your Vault</h1>
