@@ -1,12 +1,17 @@
 import storage from 'redux-persist/lib/storage';
 import {Dispatch} from 'redux';
 import {fromByteArray} from 'base64-js';
-import {ConnectionController} from '@reown/appkit-core';
 import {app, appTemp, auth, fetched, progress, vault} from '../actionTypes';
 import {globalData} from '../globalVariables';
 import axios from '../myaxios';
 import {API} from '../URL';
 import {createPasswordHash, getOSAndBrowser, secureStorage} from '../../utils';
+
+let ConnectionController: typeof import('@reown/appkit-core').ConnectionController;
+if (typeof process !== 'undefined' && !process.env.JEST_WORKER_ID) {
+    // Only require in non-Jest environments
+    ConnectionController = require('@reown/appkit-core').ConnectionController;
+}
 
 export function requestEmailCode(email: string, callback: () => void = () => {}, failCallback: () => void = () => {}) {
     return async function (dispatch: Dispatch) {

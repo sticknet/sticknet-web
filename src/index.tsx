@@ -15,6 +15,7 @@ import DeleteRequestScreen from './website/DeleteRequestScreen';
 import ThankScreen from './website/ThankScreen';
 import StickProtocolScreen from './website/StickProtocolScreen';
 import SPUsageScreen from './website/SPUsageScreen';
+import CSAEPolicy from './website/CSAEPolicy';
 import {
     LoginScreen,
     PhotosScreen,
@@ -114,6 +115,7 @@ class RootContainerComponent extends PureComponent<RootContainerProps> {
                             <Route exact path='/legal' component={TermsScreen} />
                             <Route exact path='/faq' component={FAQScreen} />
                             <Route exact path='/support' component={QuestionScreen} />
+                            <Route exact path='/csae-policy' component={CSAEPolicy} />
                             <Route exact path='/account-deletion-request' component={DeleteRequestScreen} />
                             <Route exact path='/thank-you' component={ThankScreen} />
                             <Route exact path='/stick-protocol' component={StickProtocolScreen} />
