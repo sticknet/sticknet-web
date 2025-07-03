@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import s from './Footer.css';
 
+const d = new Date();
 class Footer extends PureComponent {
     render() {
         if (window.innerWidth > window.innerHeight)
@@ -11,7 +12,7 @@ class Footer extends PureComponent {
                 <div className={s.footer} id='footer'>
                     <div className={s.footerContainer}>
                         <div>
-                            <p className={s.footerText}>© 2018-2024 Sticknet. All rights reserved.</p>
+                            <p className={s.footerText}>© 2018-{d.getFullYear()} Sticknet. All rights reserved.</p>
                             <p className={s.footerText} style={{paddingTop: '2vh'}}>
                                 For inquiries: contact@sticknet.org
                             </p>
@@ -136,7 +137,7 @@ class Footer extends PureComponent {
                     </a>
                 </div>
                 <div className={s.footerGroup}>
-                    <p className={s.footerText}>© 2018-2024 Sticknet. All rights reserved.</p>
+                    <p className={s.footerText}>© 2018-{d.getFullYear()} Sticknet. All rights reserved.</p>
                     <p className={s.footerText} style={{marginTop: '2vh'}}>
                         For inquiries: contact@sticknet.org
                     </p>
